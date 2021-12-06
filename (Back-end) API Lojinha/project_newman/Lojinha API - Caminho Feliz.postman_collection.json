@@ -1,0 +1,1035 @@
+{
+	"info": {
+		"_postman_id": "1642d0e9-461d-453a-a97d-c83702f57256",
+		"name": "Caminho Feliz",
+		"description": "**Lojinha API v1.0.0**\n\nDocumentação por Tayssa Avila.\n\nVersão \"Caminho Feliz\": seguindo fluxo de execução com sucesso.\n\nAPI criada pelo Júlio de Lima para suportar seus alunos na aprendizagem de técnicas e ferramentas de teste de software.\n\nPossui funcionalidades como cadastro de usuários, login e remoção de dados do usuário. Assim como criação, edição, listagem, busca e remoção de produtos e componentes de produtos.\n\n**Base URL:** 165.227.93.41/lojinha",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Cadastro com sucesso",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();\r",
+							"\r",
+							"let str = jsonData.data.usuarioid;\r",
+							"let str2 = jsonData.data.usuariologin;\r",
+							"let str3 = jsonData.data.usuarionome;\r",
+							"\r",
+							"pm.test(\"Status code is 201\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Message está correto\", function () {\r",
+							"    pm.expect(jsonData.message).to.be.eql(\"Usuário adicionado com sucesso\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Salva valor do id\", function () {\r",
+							"    pm.environment.set(\"usuarioid\", str);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Salva valor do login\", function () {\r",
+							"    pm.environment.set(\"usuariologin\", str2);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Salva valor do nome\", function () {\r",
+							"    pm.environment.set(\"usuarionome\", str3);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Inclui a mensagem sucesso\", function () {\r",
+							"    pm.expect(jsonData.message).to.include('sucesso');\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Response time is less than 400ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(400);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response tem propriedade message\", function () {\r",
+							"    pm.expect(jsonData).to.have.property(\"message\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response tem propriedade message\", function () {\r",
+							"    pm.expect(jsonData).to.have.property(\"data\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response tem propriedade message\", function () {\r",
+							"    pm.expect(jsonData).to.have.property(\"error\");\r",
+							"});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n \"usuarionome\": \"{{$randomFullName}}\",\r\n \"usuariologin\": \"{{$randomUserName}}\",\r\n \"usuariosenha\": \"senha\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURL}}/usuario",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"usuario"
+					]
+				},
+				"description": "**Cenário:**  \nValidar cadastro de usuário com sucesso\n\n**QUANDO** executa a requisição POST/usuario preenchendo os parâmetros com valores válidos\n\n**ENTÃO** a API retorna status code 201\n\n**E** retorna a mensagem: \"Usuário adicionado com sucesso\"\n\n**E** retorna o atributo \"data\"\n\n**E** o atributo \"message\"\n\n**E** o atributo \"error\""
+			},
+			"response": []
+		},
+		{
+			"name": "Login com sucesso",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();\r",
+							"\r",
+							"let str = jsonData.data.token;\r",
+							"\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Message está correto\", function () {\r",
+							"    pm.expect(jsonData.message).to.be.eql(\"Sucesso ao realizar o login\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Salva valor do token\", function () {\r",
+							"    pm.environment.set(\"token\", str);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Inclui a mensagem sucesso\", function () {\r",
+							"    pm.expect(jsonData.message).to.include('Sucesso');\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Response time is less than 400ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(400);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response tem propriedade message\", function () {\r",
+							"    pm.expect(jsonData).to.have.property(\"message\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response tem propriedade data\", function () {\r",
+							"    pm.expect(jsonData).to.have.property(\"data\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response tem propriedade data\", function () {\r",
+							"    pm.expect(jsonData).to.have.property(\"error\");\r",
+							"});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c3VhcmlvaWQiOiIxMTU0IiwidXN1YXJpb2xvZ2luIjoic3RyaW5nIiwidXN1YXJpb25vbWUiOiIifQ.qBVv3vFp-5AbRq2FlBvbhFeBgU0HG_xpTx_JwtyEsnE",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n \"usuariologin\": \"{{usuariologin}}\",\r\n \"usuariosenha\": \"senha\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURL}}/login",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"login"
+					]
+				},
+				"description": "**Cenário:**  \nValidar login com sucesso\n\n**DADO** um usuário com cadastro válido\n\n**QUANDO** executa a requisição POST/login preenchendo os parâmetros com valores válidos\n\n**ENTÃO** a API retorna status code 200\n\n**E** retorna a mensagem: \"Sucesso ao realizar login\"\n\n**E** retorna o atributo \"data\"\n\n**E** o atributo \"message\"\n\n**E** o atributo \"error\""
+			},
+			"response": []
+		},
+		{
+			"name": "Adicionar novo produto com sucesso",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();\r",
+							"var j2 = pm.response.json().data;\r",
+							"\r",
+							"let str = j2.produtoid;\r",
+							"let str2 = j2.produtovalor;\r",
+							"let str3 = j2.produtonome;\r",
+							"\r",
+							"\r",
+							"pm.test(\"Status code is 201\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Message está correto\", function () {\r",
+							"    pm.expect(jsonData.message).to.be.eql(\"Produto adicionado com sucesso\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Salva valor do id\", function () {\r",
+							"    pm.environment.set(\"produtoid\", str);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Salva valor do produto\", function () {\r",
+							"    pm.environment.set(\"produtovalor\", str2);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Salva valor do nome do produto\", function () {\r",
+							"    pm.environment.set(\"produtonome\", str3);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Inclui a mensagem sucesso\", function () {\r",
+							"    pm.expect(jsonData.message).to.include('sucesso');\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Response time is less than 400ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(400);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response tem propriedade message\", function () {\r",
+							"    pm.expect(jsonData).to.have.property(\"message\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response tem propriedade data\", function () {\r",
+							"    pm.expect(jsonData).to.have.property(\"data\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response tem propriedade error\", function () {\r",
+							"    pm.expect(jsonData).to.have.property(\"error\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response tem propriedade produtoid\", function () {\r",
+							"    pm.expect(j2).to.have.property(\"produtoid\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "token",
+						"value": "{{token}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n \"produtonome\": \"Lápis\",\r\n \"produtovalor\": 0,\r\n \"produtocores\": [\r\n \"rosa\"\r\n ],\r\n \"componentes\": [\r\n {\r\n \"componentenome\": \"Madeira\",\r\n \"componentequantidade\": 0\r\n }\r\n ]\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURL}}/produto",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"produto"
+					]
+				},
+				"description": "**Cenário:**  \nValidar cadastro de produto com sucesso\n\n**DADO** que o usuário esteja autenticado\n\n**QUANDO** executa a requisição POST/produto preenchendo os parâmetros com valores válidos\n\n**ENTÃO** a API retorna status code 201\n\n**E** retorna a mensagem: \"Produto adicionado com sucesso\"\n\n**E** retorna o atributo \"data\"\n\n**E** o atributo \"message\"\n\n**E** o atributo \"error\""
+			},
+			"response": []
+		},
+		{
+			"name": "Buscar produtos com sucesso",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();\r",
+							"\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Message está correto\", function () {\r",
+							"    pm.expect(jsonData.message).to.be.eql(\"Listagem de produtos realizada com sucesso\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response time is less than 400ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(400);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response tem propriedade message\", function () {\r",
+							"    pm.expect(jsonData).to.have.property(\"message\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response tem propriedade data\", function () {\r",
+							"    pm.expect(jsonData).to.have.property(\"data\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response tem propriedade error\", function () {\r",
+							"    pm.expect(jsonData).to.have.property(\"error\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "token",
+						"value": "{{token}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{baseURL}}/produto",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"produto"
+					]
+				},
+				"description": "**Cenário:**  \nValidar listagem de produtos com sucesso\n\n**DADO** que existam produtos cadastrados na aplicação\n\n**E** que o usuário esteja autenticado\n\n**QUANDO** executa a requisição GET/produto\n\n**ENTÃO** a API retorna status code 200\n\n**E** retorna a mensagem: \"Listagem de produtos realizada com sucesso\"\n\n**E** retorna o atributo \"data\"\n\n**E** o atributo \"message\"\n\n**E** o atributo \"error\""
+			},
+			"response": []
+		},
+		{
+			"name": "Buscar um produto com sucesso",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();\r",
+							"var j2 = pm.response.json().data;\r",
+							"\r",
+							"let str = j2.produtoid;\r",
+							"let str2 = j2.produtovalor;\r",
+							"let str3 = j2.produtonome;\r",
+							"\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Salva valor do id\", function () {\r",
+							"    pm.environment.set(\"produtoid\", str);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Salva valor do produto\", function () {\r",
+							"    pm.environment.set(\"produtovalor\", str2);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Salva valor do nome do produto\", function () {\r",
+							"    pm.environment.set(\"produtonome\", str3);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Message está correto\", function () {\r",
+							"    pm.expect(jsonData.message).to.be.eql(\"Detalhando dados do produto\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response time is less than 400ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(400);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response tem propriedade message\", function () {\r",
+							"    pm.expect(jsonData).to.have.property(\"message\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response tem propriedade data\", function () {\r",
+							"    pm.expect(jsonData).to.have.property(\"data\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response tem propriedade error\", function () {\r",
+							"    pm.expect(jsonData).to.have.property(\"error\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response tem propriedade produtoid\", function () {\r",
+							"    pm.expect(j2).to.have.property(\"produtoid\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response é um objeto\", function () {\r",
+							"    pm.expect(jsonData).to.be.an('object');\r",
+							"});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "token",
+						"value": "{{token}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{baseURL}}/produto/:produtoId",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"produto",
+						":produtoId"
+					],
+					"variable": [
+						{
+							"key": "produtoId",
+							"value": "{{produtoid}}"
+						}
+					]
+				},
+				"description": "**Cenário:**  \nValidar busca de produto com sucesso\n\n**DADO** que existam produtos cadastrados na aplicação\n\n**E** que o usuário esteja autenticado\n\n**QUANDO** executa a requisição GET/produto/{produtoid} passando um id de produto válido\n\n**ENTÃO** a API retorna status code 200\n\n**E** retorna a mensagem: \"Detalhando dados do produto\"\n\n**E** retorna o atributo \"data\"\n\n**E** o atributo \"message\"\n\n**E** o atributo \"error\""
+			},
+			"response": []
+		},
+		{
+			"name": "Editar produto com sucesso",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();\r",
+							"var j2 = pm.response.json().data;\r",
+							"\r",
+							"let str = j2.produtoid;\r",
+							"let str2 = j2.produtovalor;\r",
+							"let str3 = j2.usuarionome;\r",
+							"\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Message está correto\", function () {\r",
+							"    pm.expect(jsonData.message).to.be.eql(\"Produto alterado com sucesso\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Salva valor do id\", function () {\r",
+							"    pm.environment.set(\"produtoid\", str);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Salva valor do produto\", function () {\r",
+							"    pm.environment.set(\"produtovalor\", str2);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Salva valor do nome do produto\", function () {\r",
+							"    pm.environment.set(\"produtonome\", str3);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Inclui a mensagem sucesso\", function () {\r",
+							"    pm.expect(jsonData.message).to.include('sucesso');\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Response time is less than 500ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(500);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response tem propriedade message\", function () {\r",
+							"    pm.expect(jsonData).to.have.property(\"message\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response tem propriedade data\", function () {\r",
+							"    pm.expect(jsonData).to.have.property(\"data\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response tem propriedade error\", function () {\r",
+							"    pm.expect(jsonData).to.have.property(\"error\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response tem propriedade produtoid\", function () {\r",
+							"    pm.expect(j2).to.have.property(\"produtoid\");\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "token",
+						"value": "{{token}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n \"produtonome\": \"string\",\r\n \"produtovalor\": 0,\r\n \"produtocores\": [\r\n \"string\"\r\n ],\r\n \"componentes\": [\r\n {\r\n \"componentenome\": \"string\",\r\n \"componentequantidade\": 0\r\n }\r\n ]\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURL}}/produto/:produtoId",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"produto",
+						":produtoId"
+					],
+					"variable": [
+						{
+							"key": "produtoId",
+							"value": "{{produtoid}}"
+						}
+					]
+				},
+				"description": "**Cenário:**  \nValidar edição de produto com sucesso\n\n**DADO** que existam produtos cadastrados na aplicação\n\n**E** que o usuário não esteja autenticado\n\n**QUANDO** executa a requisição PUT/produto/{produtoid} passando parâmetros válidos\n\n**ENTÃO** a API retorna status code 200\n\n**E** retorna a mensagem: \"Produto alterado com sucesso\"\n\n**E** retorna o atributo \"data\"\n\n**E** o atributo \"message\"\n\n**E** o atributo \"error\""
+			},
+			"response": []
+		},
+		{
+			"name": "Adicionar novo componente com sucesso",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();\r",
+							"var jsonData2 = pm.response.json().data;\r",
+							"\r",
+							"let str = jsonData2.produtoid;\r",
+							"let str2 = jsonData2.componenteid;\r",
+							"let str3 = jsonData2.componentenome;\r",
+							"let str4 = jsonData2.componentequantidade;\r",
+							"\r",
+							"pm.test(\"Status code is 201\", function () {\r",
+							"    pm.response.to.have.status(201);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Message está correto\", function () {\r",
+							"    pm.expect(jsonData.message).to.be.eql(\"Componente de produto adicionado com sucesso\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Salva valor do id\", function () {\r",
+							"    pm.environment.set(\"produtoid\", str);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Salva valor do id do componente\", function () {\r",
+							"    pm.environment.set(\"componenteid\", str2);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Salva valor do nome do componente\", function () {\r",
+							"    pm.environment.set(\"componentenome\", str3);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Salva valor da quantidade do componente\", function () {\r",
+							"    pm.environment.set(\"componentequantidade\", str4);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response time is less than 400ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(400);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response tem propriedade message\", function () {\r",
+							"    pm.expect(jsonData).to.have.property(\"message\");\r",
+							"});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "token",
+						"value": "{{token}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n \"componentenome\": \"string\",\r\n \"componentequantidade\": 0\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURL}}/produto/:produtoId/componente",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"produto",
+						":produtoId",
+						"componente"
+					],
+					"variable": [
+						{
+							"key": "produtoId",
+							"value": "{{produtoid}}"
+						}
+					]
+				},
+				"description": "**Cenário:**  \nValidar cadastro de componentes com sucesso\n\n**DADO** que existam produtos cadastrados na aplicação\n\n**E** que o usuário esteja autenticado\n\n**QUANDO** executa a requisição PUT/produto/{produtoid}/componente passando parâmetros válidos\n\n**ENTÃO** a API retorna status code 201\n\n**E** retorna a mensagem: \"Componente de produto adicionado com sucesso\"\n\n**E** retorna o atributo \"data\"\n\n**E** o atributo \"message\"\n\n**E** o atributo \"error\""
+			},
+			"response": []
+		},
+		{
+			"name": "Buscar todos os componentes com sucesso",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();\r",
+							"\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Message está correto\", function () {\r",
+							"    pm.expect(jsonData.message).to.be.eql(\"Listagem de componentes de produto realizada com sucesso\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response time is less than 400ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(400);\r",
+							"});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "token",
+						"value": "{{token}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{baseURL}}/produto/:produtoId/componente",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"produto",
+						":produtoId",
+						"componente"
+					],
+					"variable": [
+						{
+							"key": "produtoId",
+							"value": "{{produtoid}}"
+						}
+					]
+				},
+				"description": "**Cenário:**  \nValidar listagem de componentes por produto com sucesso\n\n**DADO** que existam produtos cadastrados na aplicação\n\n**E** componentes cadastrados nos produtos\n\n**E** que o usuário esteja autenticado\n\n**QUANDO** executa a requisição GET/produto/{produtoid}/componente passando um id de produto válido\n\n**ENTÃO** a API retorna status code 200\n\n**E** retorna a mensagem: \"Listagem de componentes de produto realizada com sucesso\"\n\n**E** retorna o atributo \"data\"\n\n**E** o atributo \"message\"\n\n**E** o atributo \"error\""
+			},
+			"response": []
+		},
+		{
+			"name": "Buscar componente com sucesso",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();\r",
+							"var jsonData2 = pm.response.json().data;\r",
+							"\r",
+							"let str2 = jsonData2.componenteid;\r",
+							"let str3 = jsonData2.componentenome;\r",
+							"let str4 = jsonData2.componentequantidade;\r",
+							"\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Message está correto\", function () {\r",
+							"    pm.expect(jsonData.message).to.be.eql(\"Detalhando dados do componente de produto\");\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"Salva valor do id do componente\", function () {\r",
+							"    pm.environment.set(\"componenteid\", str2);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Salva valor do nome do componente\", function () {\r",
+							"    pm.environment.set(\"componentenome\", str3);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Salva valor da quantidade do componente\", function () {\r",
+							"    pm.environment.set(\"componentequantidade\", str4);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response time is less than 400ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(400);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response tem propriedade message\", function () {\r",
+							"    pm.expect(jsonData).to.have.property(\"message\");\r",
+							"});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "token",
+						"value": "{{token}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{baseURL}}/produto/:produtoId/componente/:componenteId",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"produto",
+						":produtoId",
+						"componente",
+						":componenteId"
+					],
+					"variable": [
+						{
+							"key": "produtoId",
+							"value": "{{produtoid}}"
+						},
+						{
+							"key": "componenteId",
+							"value": "{{componenteid}}"
+						}
+					]
+				},
+				"description": "**Cenário:**  \nValidar busca por componente específico com sucesso\n\n**DADO** que existam produtos cadastrados na aplicação\n\n**E** que existam componentes cadastrados nos produtos\n\n**E** que o usuário esteja autenticado\n\n**QUANDO** executa a requisição GET/produto/{produtoid}/componente/{componenteid} passando parâmetros válidos\n\n**ENTÃO** a API retorna status code 200\n\n**E** retorna a mensagem: \"Detalhando dados do componente de produto\"\n\n**E** retorna o atributo \"data\"\n\n**E** o atributo \"message\"\n\n**E** o atributo \"error\""
+			},
+			"response": []
+		},
+		{
+			"name": "Editar componente com sucesso",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = pm.response.json();\r",
+							"\r",
+							"let str = jsonData.data.produtoid;\r",
+							"let str2 = jsonData.data.componenteid;\r",
+							"let str3 = jsonData.data.componentenome;\r",
+							"let str4 = jsonData.data.componentequantidade;\r",
+							"\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Message está correto\", function () {\r",
+							"    pm.expect(jsonData.message).to.be.eql(\"Componente de produto alterado com sucesso\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Salva valor do id\", function () {\r",
+							"    pm.environment.set(\"produtoid\", str);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Salva valor do id do componente\", function () {\r",
+							"    pm.environment.set(\"componenteid\", str2);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Salva valor do nome do componente\", function () {\r",
+							"    pm.environment.set(\"componentenome\", str3);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Salva valor da quantidade do componente\", function () {\r",
+							"    pm.environment.set(\"componentequantidade\", str4);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response time is less than 400ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(400);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response tem propriedade message\", function () {\r",
+							"    pm.expect(jsonData).to.have.property(\"message\");\r",
+							"});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "token",
+						"value": "{{token}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n \"componentenome\": \"string\",\r\n \"componentequantidade\": 0\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURL}}/produto/:produtoId/componente/:componenteId",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"produto",
+						":produtoId",
+						"componente",
+						":componenteId"
+					],
+					"variable": [
+						{
+							"key": "produtoId",
+							"value": "{{produtoid}}"
+						},
+						{
+							"key": "componenteId",
+							"value": "{{componenteid}}"
+						}
+					]
+				},
+				"description": "**Cenário:**  \nValidar edição de componentes com sucesso\n\n**DADO** que existam produtos cadastrados na aplicação\n\n**E** que existam componentes cadastrados\n\n**E** que o usuário esteja autenticado\n\n**QUANDO** executa a requisição PUT/produto/{produtoid}/componente/{componenteid} passando parâmetros válidos\n\n**ENTÃO** a API retorna status code 200\n\n**E** retorna a mensagem: \"Componente de produto alterado com sucesso\"\n\n**E** retorna o atributo \"data\"\n\n**E** o atributo \"message\"\n\n**E** o atributo \"error\""
+			},
+			"response": []
+		},
+		{
+			"name": "Deletar componente com sucesso",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"\r",
+							"\r",
+							"pm.test(\"Status code is 204\", function () {\r",
+							"    pm.response.to.have.status(204);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response time is less than 400ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(400);\r",
+							"});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "token",
+						"value": "{{token}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{baseURL}}/produto/:produtoId/componente/:componenteId",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"produto",
+						":produtoId",
+						"componente",
+						":componenteId"
+					],
+					"variable": [
+						{
+							"key": "produtoId",
+							"value": "{{produtoid}}"
+						},
+						{
+							"key": "componenteId",
+							"value": "{{componenteid}}"
+						}
+					]
+				},
+				"description": "**Cenário:**  \nValidar remoção de componentes com sucesso\n\n**DADO** que existam produtos cadastrados na aplicação\n\n**E** que existam componentes cadastrados em produtos\n\n**E** que o usuário esteja autenticado\n\n**QUANDO** executa a requisição DELETE/produto/{produtoid}/componente/{componenteid} passando parâmetros válidos\n\n**ENTÃO** a API retorna status code 204"
+			},
+			"response": []
+		},
+		{
+			"name": "Deletar produto com sucesso",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"\r",
+							"\r",
+							"pm.test(\"Status code is 204\", function () {\r",
+							"    pm.response.to.have.status(204);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response time is less than 400ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(400);\r",
+							"});\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "token",
+						"value": "{{token}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{baseURL}}/produto/:produtoId",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"produto",
+						":produtoId"
+					],
+					"variable": [
+						{
+							"key": "produtoId",
+							"value": "{{produtoid}}"
+						}
+					]
+				},
+				"description": "**Cenário:**  \nValidar remoção de produtos com sucesso\n\n**DADO** que existam produtos cadastrados na aplicação\n\n**E** que o usuário esteja autenticado\n\n**QUANDO** executa a requisição DELETE/produto/{produtoid} passando um id de produto válido\n\n**ENTÃO** a API retorna status code 204"
+			},
+			"response": []
+		},
+		{
+			"name": "Deletar dados do usuário com sucesso",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"\r",
+							"\r",
+							"pm.test(\"Status code is 204\", function () {\r",
+							"    pm.response.to.have.status(204);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response time is less than 400ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(400);\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c3VhcmlvaWQiOiIxMTU0IiwidXN1YXJpb2xvZ2luIjoic3RyaW5nIiwidXN1YXJpb25vbWUiOiIifQ.qBVv3vFp-5AbRq2FlBvbhFeBgU0HG_xpTx_JwtyEsnE",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "token",
+						"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c3VhcmlvaWQiOiIxMTU0IiwidXN1YXJpb2xvZ2luIjoic3RyaW5nIiwidXN1YXJpb25vbWUiOiIifQ.qBVv3vFp-5AbRq2FlBvbhFeBgU0HG_xpTx_JwtyEsnE",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{baseURL}}/dados",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"dados"
+					]
+				},
+				"description": "**Cenário:**  \nValidar remoção de dados do usuário com sucesso\n\n**DADO** que exista um usuário cadastrado na aplicação\n\n**E** que o usuário esteja autenticado\n\n**QUANDO** executa a requisição DELETE/dados preenchendo um id de usuário válido\n\n**ENTÃO** a API retorna status code 204"
+			},
+			"response": []
+		}
+	]
+}

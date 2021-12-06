@@ -1,0 +1,2835 @@
+{
+	"info": {
+		"_postman_id": "780085e5-25bc-4acf-999e-d1ec4c3a492e",
+		"name": "Lojinha API",
+		"description": "**Lojinha API v1.0.0**\n\nDocumentação por Tayssa Avila.\n\nAPI criada pelo Júlio de Lima para suportar seus alunos na aprendizagem de técnicas e ferramentas de teste de software.\n\nPossui funcionalidades como cadastro de usuários, login e remoção de dados do usuário. Assim como criação, edição, listagem, busca e remoção de produtos e componentes de produtos.\n\n**Base URL:** 165.227.93.41/lojinha",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "/login",
+			"item": [
+				{
+					"name": "Login com sucesso",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();\r",
+									"\r",
+									"let str = jsonData.data.token;\r",
+									"\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Message está correto\", function () {\r",
+									"    pm.expect(jsonData.message).to.be.eql(\"Sucesso ao realizar o login\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Salva valor do token\", function () {\r",
+									"    pm.environment.set(\"token\", str);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Inclui a mensagem sucesso\", function () {\r",
+									"    pm.expect(jsonData.message).to.include('Sucesso');\r",
+									"});\r",
+									"\r",
+									"\r",
+									"pm.test(\"Response time is less than 400ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(400);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response tem propriedade message\", function () {\r",
+									"    pm.expect(jsonData).to.have.property(\"message\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response tem propriedade data\", function () {\r",
+									"    pm.expect(jsonData).to.have.property(\"data\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response tem propriedade data\", function () {\r",
+									"    pm.expect(jsonData).to.have.property(\"error\");\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n \"usuariologin\": \"{{usuariologin}}\",\r\n \"usuariosenha\": \"string\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/login",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"login"
+							]
+						},
+						"description": "**Cenário:**  \nValidar login com sucesso  \n\n**DADO** um usuário com cadastro válido\n\n**QUANDO** executa a requisição POST/login preenchendo os parâmetros com valores válidos  \n\n**ENTÃO** a API retorna status code 200  \n\n**E** retorna a mensagem: \"Sucesso ao realizar login\"  \n\n**E** retorna o atributo \"data\"\n\n**E** o atributo \"message\"  \n\n**E** o atributo \"error\""
+					},
+					"response": []
+				},
+				{
+					"name": "Login com username errado",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"\r",
+									"\r",
+									"pm.test(\"Status code is 404\", function () {\r",
+									"    pm.response.to.have.status(404);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 400ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(400);\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n \"usuariologin\": \"string999\",\r\n \"usuariosenha\": \"string\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/login",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"login"
+							]
+						},
+						"description": "**Cenário:**  \nValidar login com username inexistente\n\n**QUANDO** executa a requisição POST/login preenchendo os parâmetros com um username inválido\n\n**ENTÃO** a API retorna status code 404"
+					},
+					"response": []
+				},
+				{
+					"name": "Login com senha incorreta",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"\r",
+									"pm.test(\"Status code is 404\", function () {\r",
+									"    pm.response.to.have.status(404);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 400ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(400);\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n \"usuariologin\": \"string\",\r\n \"usuariosenha\": \"string3232\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/login",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"login"
+							]
+						},
+						"description": "**Cenário:**  \nValidar login com senha inválida\n\n**DADO** um usuário com cadastro válido\n\n**QUANDO** executa a requisição POST/login preenchendo os parâmetros com um username válido e uma senha inválida\n\n**ENTÃO** a API retorna status code 404"
+					},
+					"response": []
+				},
+				{
+					"name": "Login em branco",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"\r",
+									"\r",
+									"pm.test(\"Status code is 404\", function () {\r",
+									"    pm.response.to.have.status(404);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 400ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(400);\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/login",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"login"
+							]
+						},
+						"description": "**Cenário:**  \nValidar login com parâmetros em branco\n\n**QUANDO** executa a requisição POST/login não preenchendo os parâmetros\n\n**ENTÃO** a API retorna status code 404"
+					},
+					"response": []
+				}
+			],
+			"description": "Rota que realiza login do usuário na aplicação, com as credenciais inseridas.\n\nPossui cenários de login com sucesso e sem sucesso."
+		},
+		{
+			"name": "/usuario",
+			"item": [
+				{
+					"name": "Cadastro com sucesso",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();\r",
+									"\r",
+									"let str = jsonData.data.usuarioid;\r",
+									"let str2 = jsonData.data.usuariologin;\r",
+									"let str3 = jsonData.data.usuarionome;\r",
+									"\r",
+									"pm.test(\"Status code is 201\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Message está correto\", function () {\r",
+									"    pm.expect(jsonData.message).to.be.eql(\"Usuário adicionado com sucesso\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Salva valor do id\", function () {\r",
+									"    pm.environment.set(\"usuarioid\", str);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Salva valor do login\", function () {\r",
+									"    pm.environment.set(\"usuariologin\", str2);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Salva valor do nome\", function () {\r",
+									"    pm.environment.set(\"usuarionome\", str3);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Inclui a mensagem sucesso\", function () {\r",
+									"    pm.expect(jsonData.message).to.include('sucesso');\r",
+									"});\r",
+									"\r",
+									"\r",
+									"pm.test(\"Response time is less than 400ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(400);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response tem propriedade message\", function () {\r",
+									"    pm.expect(jsonData).to.have.property(\"message\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response tem propriedade message\", function () {\r",
+									"    pm.expect(jsonData).to.have.property(\"data\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response tem propriedade message\", function () {\r",
+									"    pm.expect(jsonData).to.have.property(\"error\");\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n \"usuarionome\": \"{{$randomFullName}}\",\r\n \"usuariologin\": \"{{$randomUserName}}\",\r\n \"usuariosenha\": \"senha\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/usuario",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"usuario"
+							]
+						},
+						"description": "**Cenário:**  \nValidar cadastro de usuário com sucesso\n\n**QUANDO** executa a requisição POST/usuario preenchendo os parâmetros com valores válidos\n\n**ENTÃO** a API retorna status code 201\n\n**E** retorna a mensagem: \"Usuário adicionado com sucesso\"\n\n**E** retorna o atributo \"data\"\n\n**E** o atributo \"message\"\n\n**E** o atributo \"error\""
+					},
+					"response": []
+				},
+				{
+					"name": "Cadastro de usuário já existente",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();\r",
+									"\r",
+									"pm.test(\"Status code is 409\", function () {\r",
+									"    pm.response.to.have.status(409);\r",
+									"});\r",
+									"\r",
+									"\r",
+									"pm.test(\"Inclui a mensagem sucesso\", function () {\r",
+									"    pm.expect(jsonData.message).to.include('já existe');\r",
+									"});\r",
+									"\r",
+									"\r",
+									"pm.test(\"Response time is less than 400ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(400);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response tem propriedade message\", function () {\r",
+									"    pm.expect(jsonData).to.have.property(\"message\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response tem propriedade message\", function () {\r",
+									"    pm.expect(jsonData).to.have.property(\"data\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response tem propriedade message\", function () {\r",
+									"    pm.expect(jsonData).to.have.property(\"error\");\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n \"usuarionome\": \"exemplo12\",\r\n \"usuariologin\": \"exemplo12\",\r\n \"usuariosenha\": \"exemplo12\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/usuario",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"usuario"
+							]
+						},
+						"description": "**Cenário:**  \nValidar cadastro de usuário já existente\n\n**DADO** que exista um usuário cadastrado\n\n**QUANDO** executa a requisição POST/usuario preenchendo os parâmetros com valores já cadastrados\n\n**ENTÃO** a API retorna status code 409\n\n**E** retorna a mensagem: \"O usuário exemplo12 já existe.\"\n\n**E** retorna o atributo \"data\"\n\n**E** o atributo \"message\"\n\n**E** o atributo \"error\""
+					},
+					"response": []
+				},
+				{
+					"name": "Cadastro em branco",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();\r",
+									"\r",
+									"pm.test(\"Status code is 409\", function () {\r",
+									"    pm.response.to.have.status(409);\r",
+									"});\r",
+									"\r",
+									"\r",
+									"pm.test(\"Inclui a mensagem sucesso\", function () {\r",
+									"    pm.expect(jsonData.message).to.include('já existe');\r",
+									"});\r",
+									"\r",
+									"\r",
+									"pm.test(\"Response time is less than 400ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(400);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response tem propriedade message\", function () {\r",
+									"    pm.expect(jsonData).to.have.property(\"message\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response tem propriedade message\", function () {\r",
+									"    pm.expect(jsonData).to.have.property(\"data\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response tem propriedade message\", function () {\r",
+									"    pm.expect(jsonData).to.have.property(\"error\");\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/usuario",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"usuario"
+							]
+						},
+						"description": "**Cenário:**  \nValidar cadastro de usuário com parâmetros em branco\n\n**QUANDO** executa a requisição POST/usuario sem preencher os parâmetros\n\n**ENTÃO** a API retorna status code 409\n\n**E** retorna a mensagem: \"O usuário já existe.\"\n\n**E** retorna o atributo \"data\"\n\n**E** o atributo \"message\"\n\n**E** o atributo \"error\""
+					},
+					"response": []
+				}
+			],
+			"description": "Rota que realiza cadastro de um novo usuário na aplicação, com as informações inseridas.\n\nPossui cenários de cadastro com sucesso e sem sucesso."
+		},
+		{
+			"name": "/dados",
+			"item": [
+				{
+					"name": "Deletar dados do usuário com sucesso",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"\r",
+									"\r",
+									"pm.test(\"Status code is 204\", function () {\r",
+									"    pm.response.to.have.status(204);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 400ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(400);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "token",
+								"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c3VhcmlvaWQiOiIxMTU0IiwidXN1YXJpb2xvZ2luIjoic3RyaW5nIiwidXN1YXJpb25vbWUiOiIifQ.qBVv3vFp-5AbRq2FlBvbhFeBgU0HG_xpTx_JwtyEsnE",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseURL}}/dados",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"dados"
+							]
+						},
+						"description": "**Cenário:**  \nValidar remoção de dados do usuário com sucesso\n\n**DADO** que exista um usuário cadastrado na aplicação\n\n**E** que o usuário esteja autenticado\n\n**QUANDO** executa a requisição DELETE/dados preenchendo um id de usuário válido\n\n**ENTÃO** a API retorna status code 204"
+					},
+					"response": []
+				},
+				{
+					"name": "Deletar dados do usuário sem autenticação",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"\r",
+									"\r",
+									"pm.test(\"Status code is 500\", function () {\r",
+									"    pm.response.to.have.status(500);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 400ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(400);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/dados",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"dados"
+							]
+						},
+						"description": "**Cenário:**  \nValidar remoção de dados do usuário sem autenticação\n\n**DADO** que o usuário não esteja autenticado\n\n**QUANDO** executa a requisição DELETE/dados preenchendo um id qualquer\n\n**ENTÃO** a API retorna status code 500"
+					},
+					"response": []
+				}
+			],
+			"description": "Rota que realiza remoção de todos os dados de um usuário na aplicação, restaurando ao estado inicial.\n\nPossui cenários de remoção de dados com sucesso e sem sucesso."
+		},
+		{
+			"name": "/produto",
+			"item": [
+				{
+					"name": "/component",
+					"item": [
+						{
+							"name": "Adicionar novo componente com sucesso",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var jsonData = pm.response.json();\r",
+											"var jsonData2 = pm.response.json().data;\r",
+											"\r",
+											"let str = jsonData2.produtoid;\r",
+											"let str2 = jsonData2.componenteid;\r",
+											"let str3 = jsonData2.componentenome;\r",
+											"let str4 = jsonData2.componentequantidade;\r",
+											"\r",
+											"pm.test(\"Status code is 201\", function () {\r",
+											"    pm.response.to.have.status(201);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Message está correto\", function () {\r",
+											"    pm.expect(jsonData.message).to.be.eql(\"Componente de produto adicionado com sucesso\");\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Salva valor do id\", function () {\r",
+											"    pm.environment.set(\"produtoid\", str);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Salva valor do id do componente\", function () {\r",
+											"    pm.environment.set(\"componenteid\", str2);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Salva valor do nome do componente\", function () {\r",
+											"    pm.environment.set(\"componentenome\", str3);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Salva valor da quantidade do componente\", function () {\r",
+											"    pm.environment.set(\"componentequantidade\", str4);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Response time is less than 400ms\", function () {\r",
+											"    pm.expect(pm.response.responseTime).to.be.below(400);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Response tem propriedade message\", function () {\r",
+											"    pm.expect(jsonData).to.have.property(\"message\");\r",
+											"});\r",
+											"\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "token",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n \"componentenome\": \"string\",\r\n \"componentequantidade\": 0\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseURL}}/produto/:produtoId/componente",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"produto",
+										":produtoId",
+										"componente"
+									],
+									"variable": [
+										{
+											"key": "produtoId",
+											"value": "{{produtoid}}"
+										}
+									]
+								},
+								"description": "**Cenário:**  \nValidar cadastro de componentes com sucesso\n\n**DADO** que existam produtos cadastrados na aplicação\n\n**E** que o usuário esteja autenticado\n\n**QUANDO** executa a requisição PUT/produto/{produtoid}/componente passando parâmetros válidos\n\n**ENTÃO** a API retorna status code 201\n\n**E** retorna a mensagem: \"Componente de produto adicionado com sucesso\"\n\n**E** retorna o atributo \"data\"\n\n**E** o atributo \"message\"\n\n**E** o atributo \"error\""
+							},
+							"response": []
+						},
+						{
+							"name": "Adicionar novo componente em produto inexistente",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var jsonData = pm.response.json();\r",
+											"\r",
+											"pm.test(\"Status code is 400\", function () {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Message está correto\", function () {\r",
+											"    pm.expect(jsonData.message).to.be.eql(\"Ocorreram problemas ao registrar esse componente de produto\");\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Response time is less than 400ms\", function () {\r",
+											"    pm.expect(pm.response.responseTime).to.be.below(400);\r",
+											"});\r",
+											"\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "token",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n \"componentenome\": \"string\",\r\n \"componentequantidade\": 0\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseURL}}/produto/:produtoId/componente",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"produto",
+										":produtoId",
+										"componente"
+									],
+									"variable": [
+										{
+											"key": "produtoId",
+											"value": "4203311"
+										}
+									]
+								},
+								"description": "**Cenário:**  \nValidar cadastro de componentes em produto inexistente\n\n**DADO** que o usuário esteja autenticado\n\n**QUANDO** executa a requisição PUT/produto/{produtoid}/componente passando um id de produto inválido\n\n**ENTÃO** a API retorna status code 400\n\n**E** retorna a mensagem: \"Ocorreram problemas ao registrar esse componente de produto\"\n\n**E** retorna o atributo \"data\"\n\n**E** o atributo \"message\"\n\n**E** o atributo \"error\""
+							},
+							"response": []
+						},
+						{
+							"name": "Adicionar novo componente sem autenticação",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"\r",
+											"\r",
+											"pm.test(\"Status code is 401\", function () {\r",
+											"    pm.response.to.have.status(401);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Response time is less than 400ms\", function () {\r",
+											"    pm.expect(pm.response.responseTime).to.be.below(400);\r",
+											"});\r",
+											"\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n \"componentenome\": \"string\",\r\n \"componentequantidade\": 0\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseURL}}/produto/:produtoId/componente",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"produto",
+										":produtoId",
+										"componente"
+									],
+									"variable": [
+										{
+											"key": "produtoId",
+											"value": "41966"
+										}
+									]
+								},
+								"description": "**Cenário:**  \nValidar cadastro de componentes sem autenticação\n\n**DADO** que o usuário não esteja autenticado\n\n**QUANDO** executa a requisição PUT/produto/{produtoid}/componente passando parâmetros quaisquer\n\n**ENTÃO** a API retorna status code 401"
+							},
+							"response": []
+						},
+						{
+							"name": "Adicionar novo componente em branco",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var jsonData = pm.response.json();\r",
+											"\r",
+											"pm.test(\"Status code is 400\", function () {\r",
+											"    pm.response.to.have.status(400);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Message está correto\", function () {\r",
+											"    pm.expect(jsonData.message).to.be.eql(\"Ocorreram problemas ao registrar esse componente de produto\");\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Response time is less than 400ms\", function () {\r",
+											"    pm.expect(pm.response.responseTime).to.be.below(400);\r",
+											"});\r",
+											"\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "token",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseURL}}/produto/:produtoId/componente",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"produto",
+										":produtoId",
+										"componente"
+									],
+									"variable": [
+										{
+											"key": "produtoId",
+											"value": "42033"
+										}
+									]
+								},
+								"description": "**Cenário:**  \nValidar cadastro de componentes com parâmetros em branco\n\n**DADO** que existam produtos cadastrados na aplicação\n\n**E** que o usuário esteja autenticado\n\n**QUANDO** executa a requisição PUT/produto/{produtoid}/componente passando um id de produto válido e parâmetros em branco\n\n**ENTÃO** a API retorna status code 400\n\n**E** retorna a mensagem: \"Ocorreram problemas ao registrar esse componente de produto\"\n\n**E** retorna o atributo \"data\"\n\n**E** o atributo \"message\"\n\n**E** o atributo \"error\""
+							},
+							"response": []
+						},
+						{
+							"name": "Buscar todos os componentes com sucesso",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var jsonData = pm.response.json();\r",
+											"\r",
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Message está correto\", function () {\r",
+											"    pm.expect(jsonData.message).to.be.eql(\"Listagem de componentes de produto realizada com sucesso\");\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Response time is less than 400ms\", function () {\r",
+											"    pm.expect(pm.response.responseTime).to.be.below(400);\r",
+											"});\r",
+											"\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "token",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{baseURL}}/produto/:produtoId/componente",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"produto",
+										":produtoId",
+										"componente"
+									],
+									"variable": [
+										{
+											"key": "produtoId",
+											"value": "{{produtoid}}"
+										}
+									]
+								},
+								"description": "**Cenário:**  \nValidar listagem de componentes por produto com sucesso\n\n**DADO** que existam produtos cadastrados na aplicação\n\n**E** componentes cadastrados nos produtos\n\n**E** que o usuário esteja autenticado\n\n**QUANDO** executa a requisição GET/produto/{produtoid}/componente passando um id de produto válido\n\n**ENTÃO** a API retorna status code 200\n\n**E** retorna a mensagem: \"Listagem de componentes de produto realizada com sucesso\"\n\n**E** retorna o atributo \"data\"\n\n**E** o atributo \"message\"\n\n**E** o atributo \"error\""
+							},
+							"response": []
+						},
+						{
+							"name": "Buscar todos os componentes de produto inexistente",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var jsonData = pm.response.json();\r",
+											"\r",
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Message está correto\", function () {\r",
+											"    pm.expect(jsonData.message).to.be.eql(\"Listagem de componentes de produto realizada com sucesso\");\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Response time is less than 400ms\", function () {\r",
+											"    pm.expect(pm.response.responseTime).to.be.below(400);\r",
+											"});\r",
+											"\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "token",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{baseURL}}/produto/:produtoId/componente",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"produto",
+										":produtoId",
+										"componente"
+									],
+									"variable": [
+										{
+											"key": "produtoId",
+											"value": "41963113232"
+										}
+									]
+								},
+								"description": "**Cenário:**  \nValidar listagem de componentes por produto com produto inexistente\n\n**DADO** que o usuário esteja autenticado\n\n**QUANDO** executa a requisição GET/produto/{produtoid}/componente passando um id de produto inválido\n\n**ENTÃO** a API retorna status code 200\n\n**E** retorna a mensagem: \"Listagem de componentes de produto realizada com sucesso\"\n\n**E** retorna o atributo \"data\"\n\n**E** o atributo \"message\"\n\n**E** o atributo \"error\""
+							},
+							"response": []
+						},
+						{
+							"name": "Buscar todos os componentes sem autenticação",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"\r",
+											"\r",
+											"pm.test(\"Status code is 401\", function () {\r",
+											"    pm.response.to.have.status(401);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Response time is less than 400ms\", function () {\r",
+											"    pm.expect(pm.response.responseTime).to.be.below(400);\r",
+											"});\r",
+											"\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseURL}}/produto/:produtoId/componente",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"produto",
+										":produtoId",
+										"componente"
+									],
+									"variable": [
+										{
+											"key": "produtoId",
+											"value": "41963"
+										}
+									]
+								},
+								"description": "**Cenário:**  \nValidar listagem de componentes por produto sem autenticação\n\n**DADO** que o usuário não esteja autenticado\n\n**QUANDO** executa a requisição GET/produto/{produtoid}/componente passando um id de produto qualquer\n\n**ENTÃO** a API retorna status code 401"
+							},
+							"response": []
+						},
+						{
+							"name": "Buscar componente com sucesso",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var jsonData = pm.response.json();\r",
+											"var jsonData2 = pm.response.json().data;\r",
+											"\r",
+											"let str2 = jsonData2.componenteid;\r",
+											"let str3 = jsonData2.componentenome;\r",
+											"let str4 = jsonData2.componentequantidade;\r",
+											"\r",
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Message está correto\", function () {\r",
+											"    pm.expect(jsonData.message).to.be.eql(\"Detalhando dados do componente de produto\");\r",
+											"});\r",
+											"\r",
+											"\r",
+											"pm.test(\"Salva valor do id do componente\", function () {\r",
+											"    pm.environment.set(\"componenteid\", str2);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Salva valor do nome do componente\", function () {\r",
+											"    pm.environment.set(\"componentenome\", str3);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Salva valor da quantidade do componente\", function () {\r",
+											"    pm.environment.set(\"componentequantidade\", str4);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Response time is less than 400ms\", function () {\r",
+											"    pm.expect(pm.response.responseTime).to.be.below(400);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Response tem propriedade message\", function () {\r",
+											"    pm.expect(jsonData).to.have.property(\"message\");\r",
+											"});\r",
+											"\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "token",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{baseURL}}/produto/:produtoId/componente/:componenteId",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"produto",
+										":produtoId",
+										"componente",
+										":componenteId"
+									],
+									"variable": [
+										{
+											"key": "produtoId",
+											"value": "{{produtoid}}"
+										},
+										{
+											"key": "componenteId",
+											"value": "{{componenteid}}"
+										}
+									]
+								},
+								"description": "**Cenário:**  \nValidar busca por componente específico com sucesso\n\n**DADO** que existam produtos cadastrados na aplicação\n\n**E** que existam componentes cadastrados nos produtos\n\n**E** que o usuário esteja autenticado\n\n**QUANDO** executa a requisição GET/produto/{produtoid}/componente/{componenteid} passando parâmetros válidos\n\n**ENTÃO** a API retorna status code 200\n\n**E** retorna a mensagem: \"Detalhando dados do componente de produto\"\n\n**E** retorna o atributo \"data\"\n\n**E** o atributo \"message\"\n\n**E** o atributo \"error\""
+							},
+							"response": []
+						},
+						{
+							"name": "Buscar componente de produto inexistente",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"\r",
+											"\r",
+											"pm.test(\"Status code is 404\", function () {\r",
+											"    pm.response.to.have.status(404);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Response time is less than 400ms\", function () {\r",
+											"    pm.expect(pm.response.responseTime).to.be.below(400);\r",
+											"});\r",
+											"\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "token",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{baseURL}}/produto/:produtoId/componente/:componenteId",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"produto",
+										":produtoId",
+										"componente",
+										":componenteId"
+									],
+									"variable": [
+										{
+											"key": "produtoId",
+											"value": "41966111"
+										},
+										{
+											"key": "componenteId",
+											"value": "47568"
+										}
+									]
+								},
+								"description": "**Cenário:**  \nValidar busca por componente específico em produto inexistente\n\n**DADO** que o usuário esteja autenticado\n\n**QUANDO** executa a requisição GET/produto/{produtoid}/componente/{componenteid} passando um id de produto inválido\n\n**ENTÃO** a API retorna status code 404"
+							},
+							"response": []
+						},
+						{
+							"name": "Buscar componente inexistente",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"\r",
+											"\r",
+											"pm.test(\"Status code is 404\", function () {\r",
+											"    pm.response.to.have.status(404);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Response time is less than 400ms\", function () {\r",
+											"    pm.expect(pm.response.responseTime).to.be.below(400);\r",
+											"});\r",
+											"\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "token",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{baseURL}}/produto/:produtoId/componente/:componenteId",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"produto",
+										":produtoId",
+										"componente",
+										":componenteId"
+									],
+									"variable": [
+										{
+											"key": "produtoId",
+											"value": "42033"
+										},
+										{
+											"key": "componenteId",
+											"value": "475681111"
+										}
+									]
+								},
+								"description": "**Cenário:**  \nValidar busca por componente inexistente\n\n**DADO** que existam produtos cadastrados na aplicação\n\n**E** que o usuário esteja autenticado\n\n**QUANDO** executa a requisição GET/produto/{produtoid}/componente/{componenteid} passando um id de produto válido\n\n**E** um id de componente inválido\n\n**ENTÃO** a API retorna status code 404"
+							},
+							"response": []
+						},
+						{
+							"name": "Buscar componente sem autenticação",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"\r",
+											"\r",
+											"pm.test(\"Status code is 401\", function () {\r",
+											"    pm.response.to.have.status(401);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Response time is less than 400ms\", function () {\r",
+											"    pm.expect(pm.response.responseTime).to.be.below(400);\r",
+											"});\r",
+											"\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseURL}}/produto/:produtoId/componente/:componenteId",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"produto",
+										":produtoId",
+										"componente",
+										":componenteId"
+									],
+									"variable": [
+										{
+											"key": "produtoId",
+											"value": "41966"
+										},
+										{
+											"key": "componenteId",
+											"value": "47568"
+										}
+									]
+								},
+								"description": "**Cenário:**  \nValidar busca por componente específico sem autenticação\n\n**DADO** que o usuário não esteja autenticado\n\n**QUANDO** executa a requisição GET/produto/{produtoid}/componente/{componenteid} passando parâmetros quaisquer\n\n**ENTÃO** a API retorna status code 401"
+							},
+							"response": []
+						},
+						{
+							"name": "Editar componente com sucesso",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var jsonData = pm.response.json();\r",
+											"\r",
+											"let str = jsonData.data.produtoid;\r",
+											"let str2 = jsonData.data.componenteid;\r",
+											"let str3 = jsonData.data.componentenome;\r",
+											"let str4 = jsonData.data.componentequantidade;\r",
+											"\r",
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Message está correto\", function () {\r",
+											"    pm.expect(jsonData.message).to.be.eql(\"Componente de produto alterado com sucesso\");\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Salva valor do id\", function () {\r",
+											"    pm.environment.set(\"produtoid\", str);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Salva valor do id do componente\", function () {\r",
+											"    pm.environment.set(\"componenteid\", str2);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Salva valor do nome do componente\", function () {\r",
+											"    pm.environment.set(\"componentenome\", str3);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Salva valor da quantidade do componente\", function () {\r",
+											"    pm.environment.set(\"componentequantidade\", str4);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Response time is less than 400ms\", function () {\r",
+											"    pm.expect(pm.response.responseTime).to.be.below(400);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Response tem propriedade message\", function () {\r",
+											"    pm.expect(jsonData).to.have.property(\"message\");\r",
+											"});\r",
+											"\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "token",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n \"componentenome\": \"string\",\r\n \"componentequantidade\": 0\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseURL}}/produto/:produtoId/componente/:componenteId",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"produto",
+										":produtoId",
+										"componente",
+										":componenteId"
+									],
+									"variable": [
+										{
+											"key": "produtoId",
+											"value": "{{produtoid}}"
+										},
+										{
+											"key": "componenteId",
+											"value": "{{componenteid}}"
+										}
+									]
+								},
+								"description": "**Cenário:**  \nValidar edição de componentes com sucesso\n\n**DADO** que existam produtos cadastrados na aplicação\n\n**E** que existam componentes cadastrados\n\n**E** que o usuário esteja autenticado\n\n**QUANDO** executa a requisição PUT/produto/{produtoid}/componente/{componenteid} passando parâmetros válidos\n\n**ENTÃO** a API retorna status code 200\n\n**E** retorna a mensagem: \"Componente de produto alterado com sucesso\"\n\n**E** retorna o atributo \"data\"\n\n**E** o atributo \"message\"\n\n**E** o atributo \"error\""
+							},
+							"response": []
+						},
+						{
+							"name": "Editar componente de produto inexistente",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 404\", function () {\r",
+											"    pm.response.to.have.status(404);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Response time is less than 400ms\", function () {\r",
+											"    pm.expect(pm.response.responseTime).to.be.below(400);\r",
+											"});\r",
+											"\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "token",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n \"componentenome\": \"string\",\r\n \"componentequantidade\": 0\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseURL}}/produto/:produtoId/componente/:componenteId",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"produto",
+										":produtoId",
+										"componente",
+										":componenteId"
+									],
+									"variable": [
+										{
+											"key": "produtoId",
+											"value": "41966111"
+										},
+										{
+											"key": "componenteId",
+											"value": "47568"
+										}
+									]
+								},
+								"description": "**Cenário:**  \nValidar edição de componentes em produto inexistente\n\n**DADO** que o usuário esteja autenticado\n\n**QUANDO** executa a requisição PUT/produto/{produtoid}/componente/{componenteid} passando um id de produto inválido\n\n**E** um id de componente qualquer\n\n**ENTÃO** a API retorna status code 404"
+							},
+							"response": []
+						},
+						{
+							"name": "Editar componente inexistente",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"\r",
+											"\r",
+											"pm.test(\"Status code is 404\", function () {\r",
+											"    pm.response.to.have.status(404);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Response time is less than 400ms\", function () {\r",
+											"    pm.expect(pm.response.responseTime).to.be.below(400);\r",
+											"});\r",
+											"\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "token",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n \"componentenome\": \"string\",\r\n \"componentequantidade\": 0\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseURL}}/produto/:produtoId/componente/:componenteId",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"produto",
+										":produtoId",
+										"componente",
+										":componenteId"
+									],
+									"variable": [
+										{
+											"key": "produtoId",
+											"value": "42033"
+										},
+										{
+											"key": "componenteId",
+											"value": "47568323232"
+										}
+									]
+								},
+								"description": "**Cenário:**  \nValidar edição de componente inexistente\n\n**DADO** que existam produtos cadastrados na aplicação\n\n**E** que o usuário esteja autenticado\n\n**QUANDO** executa a requisição PUT/produto/{produtoid}/componente/{componenteid} passando um id de produto válido\n\n**E** um id de componente inválido\n\n**ENTÃO** a API retorna status code 404"
+							},
+							"response": []
+						},
+						{
+							"name": "Editar componente com parâmetros em branco",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"\r",
+											"\r",
+											"pm.test(\"Status code is 404\", function () {\r",
+											"    pm.response.to.have.status(404);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Response time is less than 400ms\", function () {\r",
+											"    pm.expect(pm.response.responseTime).to.be.below(400);\r",
+											"});\r",
+											"\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "token",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseURL}}/produto/:produtoId/componente/:componenteId",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"produto",
+										":produtoId",
+										"componente",
+										":componenteId"
+									],
+									"variable": [
+										{
+											"key": "produtoId",
+											"value": "41966"
+										},
+										{
+											"key": "componenteId",
+											"value": "47568"
+										}
+									]
+								},
+								"description": "**Cenário:**  \nValidar edição de componentes com parâmetros em branco\n\n**DADO** que existam produtos cadastrados na aplicação\n\n**E** que existam componentes cadastrados\n\n**E** que o usuário esteja autenticado\n\n**QUANDO** executa a requisição PUT/produto/{produtoid}/componente/{componenteid} passando um id de produto válido\n\n**E** um id de componente válido\n\n**E** parâmetros em branco\n\n**ENTÃO** a API retorna status code 404"
+							},
+							"response": []
+						},
+						{
+							"name": "Editar componente sem autenticação",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"\r",
+											"\r",
+											"pm.test(\"Status code is 401\", function () {\r",
+											"    pm.response.to.have.status(401);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Response time is less than 400ms\", function () {\r",
+											"    pm.expect(pm.response.responseTime).to.be.below(400);\r",
+											"});\r",
+											"\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n \"componentenome\": \"string\",\r\n \"componentequantidade\": 0\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseURL}}/produto/:produtoId/componente/:componenteId",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"produto",
+										":produtoId",
+										"componente",
+										":componenteId"
+									],
+									"variable": [
+										{
+											"key": "produtoId",
+											"value": "41966"
+										},
+										{
+											"key": "componenteId",
+											"value": "47568"
+										}
+									]
+								},
+								"description": "**Cenário:**  \nValidar edição de componentes sem autenticação\n\n**DADO** que o usuário não esteja autenticado\n\n**QUANDO** executa a requisição PUT/produto/{produtoid}/componente/{componenteid} passando parâmetros quaisquer\n\n**ENTÃO** a API retorna status code 401"
+							},
+							"response": []
+						},
+						{
+							"name": "Deletar componente com sucesso",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"\r",
+											"\r",
+											"pm.test(\"Status code is 204\", function () {\r",
+											"    pm.response.to.have.status(204);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Response time is less than 400ms\", function () {\r",
+											"    pm.expect(pm.response.responseTime).to.be.below(400);\r",
+											"});\r",
+											"\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "token",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{baseURL}}/produto/:produtoId/componente/:componenteId",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"produto",
+										":produtoId",
+										"componente",
+										":componenteId"
+									],
+									"variable": [
+										{
+											"key": "produtoId",
+											"value": "{{produtoid}}"
+										},
+										{
+											"key": "componenteId",
+											"value": "{{componenteid}}"
+										}
+									]
+								},
+								"description": "**Cenário:**  \nValidar remoção de componentes com sucesso\n\n**DADO** que existam produtos cadastrados na aplicação\n\n**E** que existam componentes cadastrados em produtos\n\n**E** que o usuário esteja autenticado\n\n**QUANDO** executa a requisição DELETE/produto/{produtoid}/componente/{componenteid} passando parâmetros válidos\n\n**ENTÃO** a API retorna status code 204"
+							},
+							"response": []
+						},
+						{
+							"name": "Deletar componente de produto inexistente",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"\r",
+											"\r",
+											"pm.test(\"Status code is 404\", function () {\r",
+											"    pm.response.to.have.status(404);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Response time is less than 400ms\", function () {\r",
+											"    pm.expect(pm.response.responseTime).to.be.below(400);\r",
+											"});\r",
+											"\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "token",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{baseURL}}/produto/:produtoId/componente/:componenteId",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"produto",
+										":produtoId",
+										"componente",
+										":componenteId"
+									],
+									"variable": [
+										{
+											"key": "produtoId",
+											"value": "41963112"
+										},
+										{
+											"key": "componenteId",
+											"value": "47554"
+										}
+									]
+								},
+								"description": "**Cenário:**  \nValidar remoção de componentes de produto inexistente\n\n**DADO** que o usuário esteja autenticado\n\n**QUANDO** executa a requisição DELETE/produto/{produtoid}/componente/{componenteid} passando um id de produto inválido\n\n**E** um id de componente qualquer\n\n**ENTÃO** a API retorna status code 404"
+							},
+							"response": []
+						},
+						{
+							"name": "Deletar componente inexistente",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"\r",
+											"\r",
+											"pm.test(\"Status code is 404\", function () {\r",
+											"    pm.response.to.have.status(404);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Response time is less than 400ms\", function () {\r",
+											"    pm.expect(pm.response.responseTime).to.be.below(400);\r",
+											"});\r",
+											"\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "token",
+										"value": "{{token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{baseURL}}/produto/:produtoId/componente/:componenteId",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"produto",
+										":produtoId",
+										"componente",
+										":componenteId"
+									],
+									"variable": [
+										{
+											"key": "produtoId",
+											"value": "42033"
+										},
+										{
+											"key": "componenteId",
+											"value": "4755421221"
+										}
+									]
+								},
+								"description": "**Cenário:**  \nValidar remoção de componente inexistente\n\n**DADO** que existam produtos cadastrados na aplicação\n\n**E** que o usuário esteja autenticado\n\n**QUANDO** executa a requisição DELETE/produto/{produtoid}/componente/{componenteid} passando um id de produto válido\n\n**E** um id de componente inválido\n\n**ENTÃO** a API retorna status code 404"
+							},
+							"response": []
+						},
+						{
+							"name": "Deletar componente sem autenticação",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"\r",
+											"\r",
+											"pm.test(\"Status code is 401\", function () {\r",
+											"    pm.response.to.have.status(401);\r",
+											"});\r",
+											"\r",
+											"pm.test(\"Response time is less than 400ms\", function () {\r",
+											"    pm.expect(pm.response.responseTime).to.be.below(400);\r",
+											"});\r",
+											"\r",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{baseURL}}/produto/:produtoId/componente/:componenteId",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"produto",
+										":produtoId",
+										"componente",
+										":componenteId"
+									],
+									"variable": [
+										{
+											"key": "produtoId",
+											"value": "42033"
+										},
+										{
+											"key": "componenteId",
+											"value": "4755421221"
+										}
+									]
+								},
+								"description": "**Cenário:**  \nValidar remoção de componentes sem autenticação\n\n**DADO** que o usuário não esteja autenticado\n\n**QUANDO** executa a requisição DELETE/produto/{produtoid}/componente/{componenteid} passando parâmetros quaisquer\n\n**ENTÃO** a API retorna status code 401"
+							},
+							"response": []
+						}
+					],
+					"description": "Rota que realiza cadastro, edição, listagem, busca e remoção de componentes de produtos na aplicação.\n\nPossui cenários com sucesso e sem sucesso."
+				},
+				{
+					"name": "Adicionar novo produto com sucesso",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();\r",
+									"var j2 = pm.response.json().data;\r",
+									"\r",
+									"let str = j2.produtoid;\r",
+									"let str2 = j2.produtovalor;\r",
+									"let str3 = j2.produtonome;\r",
+									"\r",
+									"\r",
+									"pm.test(\"Status code is 201\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Message está correto\", function () {\r",
+									"    pm.expect(jsonData.message).to.be.eql(\"Produto adicionado com sucesso\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Salva valor do id\", function () {\r",
+									"    pm.environment.set(\"produtoid\", str);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Salva valor do produto\", function () {\r",
+									"    pm.environment.set(\"produtovalor\", str2);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Salva valor do nome do produto\", function () {\r",
+									"    pm.environment.set(\"produtonome\", str3);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Inclui a mensagem sucesso\", function () {\r",
+									"    pm.expect(jsonData.message).to.include('sucesso');\r",
+									"});\r",
+									"\r",
+									"\r",
+									"pm.test(\"Response time is less than 400ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(400);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response tem propriedade message\", function () {\r",
+									"    pm.expect(jsonData).to.have.property(\"message\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response tem propriedade data\", function () {\r",
+									"    pm.expect(jsonData).to.have.property(\"data\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response tem propriedade error\", function () {\r",
+									"    pm.expect(jsonData).to.have.property(\"error\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response tem propriedade produtoid\", function () {\r",
+									"    pm.expect(j2).to.have.property(\"produtoid\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response é um objeto\", function () {\r",
+									"    pm.expect(jsonData).to.be.an('object');\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n \"produtonome\": \"Lápis\",\r\n \"produtovalor\": 0,\r\n \"produtocores\": [\r\n \"rosa\"\r\n ],\r\n \"componentes\": [\r\n {\r\n \"componentenome\": \"Madeira\",\r\n \"componentequantidade\": 0\r\n }\r\n ]\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/produto",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"produto"
+							]
+						},
+						"description": "**Cenário:**  \nValidar cadastro de produto com sucesso\n\n**DADO** que o usuário esteja autenticado\n\n**QUANDO** executa a requisição POST/produto preenchendo os parâmetros com valores válidos\n\n**ENTÃO** a API retorna status code 201\n\n**E** retorna a mensagem: \"Produto adicionado com sucesso\"\n\n**E** retorna o atributo \"data\"\n\n**E** o atributo \"message\"\n\n**E** o atributo \"error\""
+					},
+					"response": []
+				},
+				{
+					"name": "Adicionar novo produto sem autenticação",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"\r",
+									"\r",
+									"pm.test(\"Status code is 401\", function () {\r",
+									"    pm.response.to.have.status(401);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 400ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(400);\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n \"produtonome\": \"Lápis\",\r\n \"produtovalor\": 0,\r\n \"produtocores\": [\r\n \"rosa\"\r\n ],\r\n \"componentes\": [\r\n {\r\n \"componentenome\": \"Madeira\",\r\n \"componentequantidade\": 0\r\n }\r\n ]\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/produto",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"produto"
+							]
+						},
+						"description": "**Cenário:**  \nValidar cadastro de produto sem autenticação\n\n**DADO** que o usuário não esteja autenticado\n\n**QUANDO** executa a requisição POST/produto preenchendo os parâmetros\n\n**ENTÃO** a API retorna status code 401"
+					},
+					"response": []
+				},
+				{
+					"name": "Adicionar novo produto em branco",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();\r",
+									"\r",
+									"pm.test(\"Status code is 400\", function () {\r",
+									"    pm.response.to.have.status(400);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Message está correto\", function () {\r",
+									"    pm.expect(jsonData.message).to.be.eql(\"Ocorreram problemas ao registrar esse produto\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 400ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(400);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response tem propriedade message\", function () {\r",
+									"    pm.expect(jsonData).to.have.property(\"message\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response tem propriedade data\", function () {\r",
+									"    pm.expect(jsonData).to.have.property(\"data\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response tem propriedade error\", function () {\r",
+									"    pm.expect(jsonData).to.have.property(\"error\");\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/produto",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"produto"
+							]
+						},
+						"description": "**Cenário:**  \nValidar cadastro de produto com parâmetros em branco\n\n**DADO** que o usuário esteja autenticado\n\n**QUANDO** executa a requisição POST/produto sem preencher os parâmetros\n\n**ENTÃO** a API retorna status code 400\n\n**E** retorna a mensagem: \"Ocorreram problemas ao registrar esse produto\"\n\n**E** retorna o atributo \"data\"\n\n**E** o atributo \"message\"\n\n**E** o atributo \"error\""
+					},
+					"response": []
+				},
+				{
+					"name": "Buscar produtos com sucesso",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();\r",
+									"\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Message está correto\", function () {\r",
+									"    pm.expect(jsonData.message).to.be.eql(\"Listagem de produtos realizada com sucesso\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 400ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(400);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response tem propriedade message\", function () {\r",
+									"    pm.expect(jsonData).to.have.property(\"message\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response tem propriedade data\", function () {\r",
+									"    pm.expect(jsonData).to.have.property(\"data\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response tem propriedade error\", function () {\r",
+									"    pm.expect(jsonData).to.have.property(\"error\");\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseURL}}/produto",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"produto"
+							]
+						},
+						"description": "**Cenário:**  \nValidar listagem de produtos com sucesso\n\n**DADO** que existam produtos cadastrados na aplicação\n\n**E** que o usuário esteja autenticado\n\n**QUANDO** executa a requisição GET/produto\n\n**ENTÃO** a API retorna status code 200\n\n**E** retorna a mensagem: \"Listagem de produtos realizada com sucesso\"\n\n**E** retorna o atributo \"data\"\n\n**E** o atributo \"message\"\n\n**E** o atributo \"error\""
+					},
+					"response": []
+				},
+				{
+					"name": "Buscar produtos sem autenticação",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"\r",
+									"\r",
+									"pm.test(\"Status code is 401\", function () {\r",
+									"    pm.response.to.have.status(401);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 400ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(400);\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/produto",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"produto"
+							],
+							"query": [
+								{
+									"key": "Name",
+									"value": "lapis",
+									"disabled": true
+								}
+							]
+						},
+						"description": "**Cenário:**  \nValidar listagem de produtos sem autenticação\n\n**DADO** que o usuário não esteja autenticado\n\n**QUANDO** executa a requisição GET/produto\n\n**ENTÃO** a API retorna status code 401"
+					},
+					"response": []
+				},
+				{
+					"name": "Buscar um produto com sucesso",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();\r",
+									"var j2 = pm.response.json().data;\r",
+									"\r",
+									"let str = j2.produtoid;\r",
+									"let str2 = j2.produtovalor;\r",
+									"let str3 = j2.produtonome;\r",
+									"\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Salva valor do id\", function () {\r",
+									"    pm.environment.set(\"produtoid\", str);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Salva valor do produto\", function () {\r",
+									"    pm.environment.set(\"produtovalor\", str2);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Salva valor do nome do produto\", function () {\r",
+									"    pm.environment.set(\"produtonome\", str3);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Message está correto\", function () {\r",
+									"    pm.expect(jsonData.message).to.be.eql(\"Detalhando dados do produto\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 400ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(400);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response tem propriedade message\", function () {\r",
+									"    pm.expect(jsonData).to.have.property(\"message\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response tem propriedade data\", function () {\r",
+									"    pm.expect(jsonData).to.have.property(\"data\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response tem propriedade error\", function () {\r",
+									"    pm.expect(jsonData).to.have.property(\"error\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response tem propriedade produtoid\", function () {\r",
+									"    pm.expect(j2).to.have.property(\"produtoid\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response é um objeto\", function () {\r",
+									"    pm.expect(jsonData).to.be.an('object');\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseURL}}/produto/:produtoId",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"produto",
+								":produtoId"
+							],
+							"variable": [
+								{
+									"key": "produtoId",
+									"value": "{{produtoid}}"
+								}
+							]
+						},
+						"description": "**Cenário:**  \nValidar busca de produto com sucesso\n\n**DADO** que existam produtos cadastrados na aplicação\n\n**E** que o usuário esteja autenticado\n\n**QUANDO** executa a requisição GET/produto/{produtoid} passando um id de produto válido\n\n**ENTÃO** a API retorna status code 200\n\n**E** retorna a mensagem: \"Detalhando dados do produto\"\n\n**E** retorna o atributo \"data\"\n\n**E** o atributo \"message\"\n\n**E** o atributo \"error\""
+					},
+					"response": []
+				},
+				{
+					"name": "Buscar um produto inexistente",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"\r",
+									"\r",
+									"pm.test(\"Status code is 404\", function () {\r",
+									"    pm.response.to.have.status(404);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 400ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(400);\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseURL}}/produto/:produtoId",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"produto",
+								":produtoId"
+							],
+							"variable": [
+								{
+									"key": "produtoId",
+									"value": "419664545453"
+								}
+							]
+						},
+						"description": "**Cenário:**  \nValidar busca de produto inexistente\n\n**DADO** que o usuário esteja autenticado\n\n**QUANDO** executa a requisição GET/produto/{produtoid} passando um id de produto inválido\n\n**ENTÃO** a API retorna status code 404"
+					},
+					"response": []
+				},
+				{
+					"name": "Buscar um produto sem autenticação",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"\r",
+									"\r",
+									"pm.test(\"Status code is 401\", function () {\r",
+									"    pm.response.to.have.status(401);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 400ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(400);\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/produto/:produtoId",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"produto",
+								":produtoId"
+							],
+							"variable": [
+								{
+									"key": "produtoId",
+									"value": "41966"
+								}
+							]
+						},
+						"description": "**Cenário:**  \nValidar listagem busca de produto sem autenticação\n\n**DADO** que o usuário não esteja autenticado\n\n**QUANDO** executa a requisição GET/produto/{produtoid}\n\n**ENTÃO** a API retorna status code 401"
+					},
+					"response": []
+				},
+				{
+					"name": "Editar produto com sucesso",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();\r",
+									"var j2 = pm.response.json().data;\r",
+									"\r",
+									"let str = j2.produtoid;\r",
+									"let str2 = j2.produtovalor;\r",
+									"let str3 = j2.usuarionome;\r",
+									"let str4 = j2.componentes.componenteid;\r",
+									"let str5 = j2.componentes.componentenome;\r",
+									"let str6 = j2.componentes.componentequantidade;\r",
+									"\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Message está correto\", function () {\r",
+									"    pm.expect(jsonData.message).to.be.eql(\"Produto alterado com sucesso\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Salva valor do id\", function () {\r",
+									"    pm.environment.set(\"produtoid\", str);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Salva valor do produto\", function () {\r",
+									"    pm.environment.set(\"produtovalor\", str2);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Salva valor do nome do produto\", function () {\r",
+									"    pm.environment.set(\"produtonome\", str3);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Salva valor do id do componente\", function () {\r",
+									"    pm.environment.set(\"componenteid\", str4);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Salva valor do nome do componente\", function () {\r",
+									"    pm.environment.set(\"componentenome\", str5);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Salva valor da quantidade do componente\", function () {\r",
+									"    pm.environment.set(\"componentequantidade\", str6);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Inclui a mensagem sucesso\", function () {\r",
+									"    pm.expect(jsonData.message).to.include('sucesso');\r",
+									"});\r",
+									"\r",
+									"\r",
+									"pm.test(\"Response time is less than 500ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(500);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response tem propriedade message\", function () {\r",
+									"    pm.expect(jsonData).to.have.property(\"message\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response tem propriedade data\", function () {\r",
+									"    pm.expect(jsonData).to.have.property(\"data\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response tem propriedade error\", function () {\r",
+									"    pm.expect(jsonData).to.have.property(\"error\");\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response tem propriedade produtoid\", function () {\r",
+									"    pm.expect(j2).to.have.property(\"produtoid\");\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n \"produtonome\": \"string\",\r\n \"produtovalor\": 0,\r\n \"produtocores\": [\r\n \"string\"\r\n ],\r\n \"componentes\": [\r\n {\r\n \"componentenome\": \"string\",\r\n \"componentequantidade\": 0\r\n }\r\n ]\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/produto/:produtoId",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"produto",
+								":produtoId"
+							],
+							"variable": [
+								{
+									"key": "produtoId",
+									"value": "{{produtoid}}"
+								}
+							]
+						},
+						"description": "**Cenário:**  \nValidar edição de produto com sucesso\n\n**DADO** que existam produtos cadastrados na aplicação\n\n**E** que o usuário não esteja autenticado\n\n**QUANDO** executa a requisição PUT/produto/{produtoid} passando parâmetros válidos\n\n**ENTÃO** a API retorna status code 200\n\n**E** retorna a mensagem: \"Produto alterado com sucesso\"\n\n**E** retorna o atributo \"data\"\n\n**E** o atributo \"message\"\n\n**E** o atributo \"error\""
+					},
+					"response": []
+				},
+				{
+					"name": "Editar produto sem autenticação",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"\r",
+									"\r",
+									"pm.test(\"Status code is 401\", function () {\r",
+									"    pm.response.to.have.status(401);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 400ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(400);\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n \"produtonome\": \"string\",\r\n \"produtovalor\": 0,\r\n \"produtocores\": [\r\n \"string\"\r\n ],\r\n \"componentes\": [\r\n {\r\n \"componentenome\": \"string\",\r\n \"componentequantidade\": 0\r\n }\r\n ]\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/produto/:produtoId",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"produto",
+								":produtoId"
+							],
+							"variable": [
+								{
+									"key": "produtoId",
+									"value": "41966"
+								}
+							]
+						},
+						"description": "**Cenário:**  \nValidar edição de produto sem autenticação\n\n**DADO** que o usuário não esteja autenticado\n\n**QUANDO** executa a requisição PUT/produto/{produtoid} passando parâmetros quaisquer\n\n**ENTÃO** a API retorna status code 401"
+					},
+					"response": []
+				},
+				{
+					"name": "Editar produto inexistente",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"\r",
+									"\r",
+									"pm.test(\"Status code is 404\", function () {\r",
+									"    pm.response.to.have.status(404);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 400ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(400);\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n \"produtonome\": \"string\",\r\n \"produtovalor\": 0,\r\n \"produtocores\": [\r\n \"string\"\r\n ],\r\n \"componentes\": [\r\n {\r\n \"componentenome\": \"string\",\r\n \"componentequantidade\": 0\r\n }\r\n ]\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/produto/:produtoId",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"produto",
+								":produtoId"
+							],
+							"variable": [
+								{
+									"key": "produtoId",
+									"value": "41966"
+								}
+							]
+						},
+						"description": "**Cenário:**  \nValidar edição de produto inexistente\n\n**DADO** que existam produtos cadastrados na aplicação\n\n**E** que o usuário esteja autenticado\n\n**QUANDO** executa a requisição PUT/produto/{produtoid} passando um id de produto inválido\n\n**ENTÃO** a API retorna status code 404"
+					},
+					"response": []
+				},
+				{
+					"name": "Editar produto com parâmetros em branco",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"\r",
+									"\r",
+									"pm.test(\"Status code is 404\", function () {\r",
+									"    pm.response.to.have.status(404);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 400ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(400);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/produto/:produtoId",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"produto",
+								":produtoId"
+							],
+							"variable": [
+								{
+									"key": "produtoId",
+									"value": "42033"
+								}
+							]
+						},
+						"description": "**Cenário:**  \nValidar edição de produto com parâmetros em branco\n\n**DADO** que existam produtos cadastrados na aplicação\n\n**E** que o usuário esteja autenticado\n\n**QUANDO** executa a requisição PUT/produto/{produtoid} sem passar os parâmetros\n\n**ENTÃO** a API retorna status code 404"
+					},
+					"response": []
+				},
+				{
+					"name": "Deletar produto com sucesso",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"\r",
+									"\r",
+									"pm.test(\"Status code is 204\", function () {\r",
+									"    pm.response.to.have.status(204);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 400ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(400);\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseURL}}/produto/:produtoId",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"produto",
+								":produtoId"
+							],
+							"variable": [
+								{
+									"key": "produtoId",
+									"value": "{{produtoid}}"
+								}
+							]
+						},
+						"description": "**Cenário:**  \nValidar remoção de produtos com sucesso\n\n**DADO** que existam produtos cadastrados na aplicação\n\n**E** que o usuário esteja autenticado\n\n**QUANDO** executa a requisição DELETE/produto/{produtoid} passando um id de produto válido\n\n**ENTÃO** a API retorna status code 204"
+					},
+					"response": []
+				},
+				{
+					"name": "Deletar produto sem autenticação",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"\r",
+									"\r",
+									"pm.test(\"Status code is 401\", function () {\r",
+									"    pm.response.to.have.status(401);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 400ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(400);\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/produto/:produtoId",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"produto",
+								":produtoId"
+							],
+							"variable": [
+								{
+									"key": "produtoId",
+									"value": "42033"
+								}
+							]
+						},
+						"description": "**Cenário:**  \nValidar remoção de produtos sem autenticação\n\n**DADO** que existam produtos cadastrados na aplicação\n\n**E** que o usuário não esteja autenticado\n\n**QUANDO** executa a requisição DELETE/produto/{produtoid} passando um id de produto qualquer\n\n**ENTÃO** a API retorna status code 401"
+					},
+					"response": []
+				},
+				{
+					"name": "Deletar produto inexistente",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"\r",
+									"\r",
+									"pm.test(\"Status code is 404\", function () {\r",
+									"    pm.response.to.have.status(404);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 400ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(400);\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "token",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{baseURL}}/produto/:produtoId",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"produto",
+								":produtoId"
+							],
+							"variable": [
+								{
+									"key": "produtoId",
+									"value": "41960"
+								}
+							]
+						},
+						"description": "**Cenário:**  \nValidar remoção de produtos inexistentes\n\n**DADO** que o usuário esteja autenticado\n\n**QUANDO** executa a requisição DELETE/produto/{produtoid} passando um id de produto inválido\n\n**ENTÃO** a API retorna status code 404"
+					},
+					"response": []
+				}
+			],
+			"description": "Rota que realiza cadastro, edição, listagem, busca e remoção de produtos na aplicação.\n\nPossui cenários com sucesso e sem sucesso."
+		}
+	]
+}
