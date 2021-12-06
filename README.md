@@ -74,4 +74,4 @@ Desenvolvido por Tayssa Jardim de Avila.
     		Screenshot (imagem e vídeo dependendo do bug) .
 
  
-
+Mais informações contidas no README de cada parte.
