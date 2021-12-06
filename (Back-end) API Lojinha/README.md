@@ -64,8 +64,8 @@
     
     Os casos de testes estão presentes na documentação gerada a partir do Postman, nas URLs a seguir:
     
-    Todos os cenários:
+    Todos os cenários: https://documenter.getpostman.com/view/17912914/UVJigDk3
     
-    Caminho Feliz:
+    Caminho Feliz: https://documenter.getpostman.com/view/17912914/UVJigDk2
 
     Os testes aapresentados aqui foram realizados na ferramenta Postman, utilizando a url base: “165.227.93.41/lojinha” e estão presentes como arquivo de Collection nomeados       "Lojinha API" e "Lojinha API - Caminho Feliz", e de forma mais visual nos reports do Newman, presentes na pasta "project_newman/newman" em HTML, podendo ser abertos com          qualquer navegador. O ambiente utilizado na hora dos testes no Postman está contido no arquivo do tipo environment chamado "Ambiente".
