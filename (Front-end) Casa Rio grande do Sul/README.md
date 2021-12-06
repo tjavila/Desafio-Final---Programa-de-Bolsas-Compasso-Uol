@@ -34,7 +34,6 @@
   
         Verifique que as informações do usuário podem ser cadastradas.
         Verifique que as informações de produto podem ser consultadas.
-        Verifique que as informações de Lista de presentes podem ser cadastradas, consultadas e removidas do sistema.
         Verifique que as informações de carrinho podem ser cadastradas, consultadas, editadas e removidas do sistema.
         Verifique que as informações úteis cadastradas possam ser consultadas.
         Verifique que o sistema é capaz de buscar e manter atualizadas as informações.
@@ -49,9 +48,8 @@
   •	Teste de Segurança e de Controle de Acesso
   
         Verificar que usuários não cadastrados não podem acessar informações restritas aos cadastrados.
-        Verificar que usuários não autenticados não podem inserir, atualizar ou remover produtos na Lista de Presentes.
         
 4. Estratégia de Teste
 
-    Foram realizados casos de testes com todos os cenários pensados para as funcionalidades de login, cadastro, carrinho, filtro e busca de produtos, e Lista de Presentes, sendo     eles cenários de sucesso e cenários de falha, que foram escritos na linguagem Gherkin através de um arquivo .feature na ferramenta Visual Studio Code. Os arquivos estão         separados por funcionalidade, onde cada arquivo traz o nome da funcionalidade no qual os casos de testes foram implementados.
+    Foram realizados casos de testes com todos os cenários pensados para as funcionalidades de login, cadastro, carrinho, filtro e busca de produtos, sendo eles cenários de         sucesso e cenários de falha, que foram escritos na linguagem Gherkin através de um arquivo .feature na ferramenta Visual Studio Code. Os arquivos estão separados por             funcionalidade, onde cada arquivo traz o nome da funcionalidade no qual os casos de testes foram implementados.
 
