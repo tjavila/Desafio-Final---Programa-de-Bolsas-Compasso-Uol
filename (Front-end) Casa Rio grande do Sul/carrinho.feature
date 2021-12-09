@@ -28,7 +28,7 @@ Funcionalidade: Carrinho
         E confirmar
         Então o produto deve ser deletado do carrinho
 
-    Esquema do Cenário: Checkout
+    Esquema do Cenário: Realizar checkout
         Dado que esteja na página do carrinho
         E que possua produto(s) no carrinho
         Quando realizar a conclusão da compra
