@@ -19,3 +19,5 @@ Estes bugs e melhorias reportados no Jira, foram exportados em diversos formatos
 
 Os campos presentes nos reports são: Título, Pré-requisito (se houver), Site, Descrição, Resultado esperado, Resultado obtido, Passos para Reproduzir, Ambiente, Relator, Responsável, Categoria, Severidade, Prioridade e Anexos.
 
+As evidências, sendo elas screenshots e/ou vídeos, estão em anexo em seus respectivos reports.
+
