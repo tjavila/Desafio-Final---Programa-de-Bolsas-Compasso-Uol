@@ -52,4 +52,18 @@
 4. Estratégia de Teste
 
     Foram realizados casos de testes com todos os cenários pensados para as funcionalidades de login, cadastro, carrinho, filtro e busca de produtos, sendo eles cenários de         sucesso e cenários de falha, que foram escritos na linguagem Gherkin através de um arquivo .feature na ferramenta Visual Studio Code. Os arquivos estão separados por             funcionalidade, onde cada arquivo traz o nome da funcionalidade no qual os casos de testes foram implementados.
+    Os casos de testes criados foram:
+           Realizar login válido
+           Realizar login inválido
+           Realizar logout
+           Cadastrar usuário inválido
+           Cadastrar usuário válido
+           Adicionar produto ao carrinho
+           Remover produto da página de carrinho
+           Remover produto do carrinho flutuante
+           Realizar checkout
+           Filtrar produtos
+           Busca de produtos
+           Busca de produtos inexistentes
+    
 
