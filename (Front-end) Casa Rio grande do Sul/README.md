@@ -70,4 +70,4 @@
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------
 Adicional: Mapa mental no XMind
 
-O mapa mental da Casa Rio grande do Sul, criado no XMind, foi criado para auxiliar no registro de cenários existentes para cada funcionalidade. Então o mapa foi construído conforme foram testados no site dos cenários e descobertas novas possibilidades de resposta, para facilitar a montagem dos casos de testes em Gherkin no VSCode.
+O mapa mental da Casa Rio Grande do Sul, criado no XMind, foi criado para auxiliar no registro de cenários existentes para cada funcionalidade. Então o mapa foi construído conforme foram testados no site dos cenários e descobertas novas possibilidades de resposta, para facilitar a montagem dos casos de testes em Gherkin no VSCode.
