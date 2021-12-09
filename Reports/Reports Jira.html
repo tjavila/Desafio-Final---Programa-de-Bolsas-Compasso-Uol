@@ -1,0 +1,1237 @@
+<html
+        xmlns="http://www.w3.org/TR/REC-html40">
+<head>
+<title>Jira</title>
+<style type="text/css">
+table {
+    mso-displayed-decimal-separator:"\,";
+    mso-displayed-thousand-separator:"\.";
+}
+body
+{
+    margin: 0px;
+    font-size: 12px;
+    font-family: Arial, sans-serif;
+    color:black;
+}
+
+</style>
+<META HTTP-EQUIV="Content-Type" Content="application/vnd.ms-excel; charset=UTF-8">
+<!-- JRA-7598 - ensure fields (e.g. description) occupy only one cell - even fields containing newlines. -->
+<!--
+Vertical align all cells to the top, in order to align all issue rows of issuetable to the top,
+since Excel does not use or save the css files it is hardcoded here.
+-->
+<style>
+@page
+{
+mso-page-orientation:landscape;
+margin:.25in .25in .5in .25in;
+mso-header-margin:.5in;
+mso-footer-margin:.25in;
+mso-footer-data:"&R&P of &N";
+mso-horizontal-page-align:center;
+mso-vertical-page-align:center;
+}
+
+td.issuekey,
+td.issuetype,
+td.status {
+    mso-style-parent: "";
+    mso-number-format: \@;
+    text-align: left;
+}
+br
+{
+    mso-data-placement:same-cell;
+}
+
+td
+{
+    vertical-align: top;
+}
+</style>
+
+<!--[if gte mso 9]><xml>
+<x:ExcelWorkbook>
+<x:ExcelWorksheets>
+<x:ExcelWorksheet>
+<x:Name>general_report</x:Name>
+<x:WorksheetOptions>
+<x:Print>
+<x:ValidPrinterInfo/>
+</x:Print>
+</x:WorksheetOptions>
+</x:ExcelWorksheet>
+</x:ExcelWorksheets>
+</x:ExcelWorkbook>
+</xml><![endif]-->
+</head>
+<body>
+
+<table border="1">
+    <tr bgcolor="#205081" height="30">
+        <td colspan="64">
+            <img src="https://tayssaavila.atlassian.net/images/icon-jira-software-logo.png" width="57" height="30" border="0" alt="Jira">
+        </td>
+    </tr>
+    <tr>
+        <td colspan="64">
+            <a href="https://tayssaavila.atlassian.net/issues/?jql=project+%3D+%22DFRDB%22+ORDER+BY+created+DESC">Jira</a>
+        </td>
+    </tr>
+    <tr>
+                <td colspan="64">
+            Exibindo 7 itens como em 09/dez/21 11:41 AM.
+        </td>
+    </tr>
+</table>
+
+
+
+
+                                        <table id="issuetable" class="aui " border="1" cellpadding="3" cellspacing="1" width="100%">
+                        <thead>
+        <tr class="rowHeader">
+            
+                                                            <th class="colHeaderLink headerrow-project" data-id="project">
+                            Projeto
+                                                    </th>
+                                                
+                                                            <th class="colHeaderLink headerrow-issuekey" data-id="issuekey">
+                            Chave
+                                                    </th>
+                                                
+                                                            <th class="colHeaderLink headerrow-summary" data-id="summary">
+                            Resumo
+                                                    </th>
+                                                
+                                                            <th class="colHeaderLink headerrow-issuetype" data-id="issuetype">
+                            Tipo de item
+                                                    </th>
+                                                
+                                                            <th class="colHeaderLink headerrow-status" data-id="status">
+                            Status
+                                                    </th>
+                                                
+                                                            <th class="colHeaderLink headerrow-priority" data-id="priority">
+                            Prioridade
+                                                    </th>
+                                                
+                                                            <th class="colHeaderLink headerrow-resolution" data-id="resolution">
+                            Resolução
+                                                    </th>
+                                                
+                                                            <th class="colHeaderLink headerrow-assignee" data-id="assignee">
+                            Responsável
+                                                    </th>
+                                                
+                                                            <th class="colHeaderLink headerrow-reporter" data-id="reporter">
+                            Relator
+                                                    </th>
+                                                
+                                                            <th class="colHeaderLink headerrow-creator" data-id="creator">
+                            Criador
+                                                    </th>
+                                                
+                                                            <th class="colHeaderLink headerrow-created" data-id="created">
+                            Criado
+                                                    </th>
+                                                
+                                                            <th class="colHeaderLink headerrow-lastViewed" data-id="lastViewed">
+                            Última visualização
+                                                    </th>
+                                                
+                                                            <th class="colHeaderLink headerrow-updated" data-id="updated">
+                            Atualizado(a)
+                                                    </th>
+                                                
+                                                            <th class="colHeaderLink headerrow-resolutiondate" data-id="resolutiondate">
+                            Resolvido
+                                                    </th>
+                                                
+                                                            <th class="colHeaderLink headerrow-versions" data-id="versions">
+                            Versões afetadas
+                                                    </th>
+                                                
+                                                            <th class="colHeaderLink headerrow-fixVersions" data-id="fixVersions">
+                            Versões corrigidas
+                                                    </th>
+                                                
+                                                            <th class="colHeaderLink headerrow-components" data-id="components">
+                            Componentes
+                                                    </th>
+                                                
+                                                            <th class="colHeaderLink headerrow-duedate" data-id="duedate">
+                            Data limite
+                                                    </th>
+                                                
+                                                            <th class="colHeaderLink headerrow-votes" data-id="votes">
+                            Votos
+                                                    </th>
+                                                
+                                                            <th class="colHeaderLink headerrow-watches" data-id="watches">
+                            Observadores
+                                                    </th>
+                                                
+                                                            <th class="colHeaderLink headerrow-thumbnail" data-id="thumbnail">
+                            Imagens
+                                                    </th>
+                                                
+                                                            <th class="colHeaderLink headerrow-timeoriginalestimate" data-id="timeoriginalestimate">
+                            Estimativa original
+                                                    </th>
+                                                
+                                                            <th class="colHeaderLink headerrow-timeestimate" data-id="timeestimate">
+                            Estimativa de trabalho restante
+                                                    </th>
+                                                
+                                                            <th class="colHeaderLink headerrow-timespent" data-id="timespent">
+                            Tempo gasto
+                                                    </th>
+                                                
+                                                            <th class="colHeaderLink headerrow-workratio" data-id="workratio">
+                            Razão Trabalhada
+                                                    </th>
+                                                
+                                                            <th class="colHeaderLink headerrow-subtasks" data-id="subtasks">
+                            Subtarefas
+                                                    </th>
+                                                
+                                                            <th class="colHeaderLink headerrow-issuelinks" data-id="issuelinks">
+                            Itens associados
+                                                    </th>
+                                                
+                                                            <th class="colHeaderLink headerrow-environment" data-id="environment">
+                            Ambiente
+                                                    </th>
+                                                
+                                                            <th class="colHeaderLink headerrow-description" data-id="description">
+                            Descrição
+                                                    </th>
+                                                
+                                                            <th class="colHeaderLink headerrow-security" data-id="security">
+                            Nível de Segurança
+                                                    </th>
+                                                
+                                                            <th class="colHeaderLink headerrow-progress" data-id="progress">
+                            Progresso
+                                                    </th>
+                                                
+                                                            <th class="colHeaderLink headerrow-aggregateprogress" data-id="aggregateprogress">
+                            Σ de Progresso
+                                                    </th>
+                                                
+                                                            <th class="colHeaderLink headerrow-aggregatetimespent" data-id="aggregatetimespent">
+                            Σ de Tempo Gasto
+                                                    </th>
+                                                
+                                                            <th class="colHeaderLink headerrow-aggregatetimeestimate" data-id="aggregatetimeestimate">
+                            Σ da estimativa de trabalho restante
+                                                    </th>
+                                                
+                                                            <th class="colHeaderLink headerrow-aggregatetimeoriginalestimate" data-id="aggregatetimeoriginalestimate">
+                            Σ da Estimativa Original
+                                                    </th>
+                                                
+                                                            <th class="colHeaderLink headerrow-labels" data-id="labels">
+                            Categorias
+                                                    </th>
+                                                
+                                                            <th class="colHeaderLink headerrow-statuscategorychangedate" data-id="statuscategorychangedate">
+                            Categoria do status alterada
+                                                    </th>
+                                                
+                                                            <th class="colHeaderLink headerrow-statusCategory" data-id="statusCategory">
+                            Categoria do status
+                                                    </th>
+                                                
+                                                            <th class="colHeaderLink headerrow-parent" data-id="parent">
+                            Pai
+                                                    </th>
+                                                
+                                                            <th class="colHeaderLink headerrow-customfield_10009" data-id="customfield_10009">
+                            Actual end
+                                                    </th>
+                                                
+                                                            <th class="colHeaderLink headerrow-customfield_10008" data-id="customfield_10008">
+                            Actual start
+                                                    </th>
+                                                
+                                                            <th class="colHeaderLink headerrow-customfield_10003" data-id="customfield_10003">
+                            Approvers
+                                                    </th>
+                                                
+                                                            <th class="colHeaderLink headerrow-customfield_10007" data-id="customfield_10007">
+                            Change reason
+                                                    </th>
+                                                
+                                                            <th class="colHeaderLink headerrow-customfield_10006" data-id="customfield_10006">
+                            Change risk
+                                                    </th>
+                                                
+                                                            <th class="colHeaderLink headerrow-customfield_10005" data-id="customfield_10005">
+                            Change type
+                                                    </th>
+                                                
+                                                            <th class="colHeaderLink headerrow-customfield_10013" data-id="customfield_10013">
+                            Epic Color
+                                                    </th>
+                                                
+                                                            <th class="colHeaderLink headerrow-customfield_10014" data-id="customfield_10014">
+                            Epic Link
+                                                    </th>
+                                                
+                                                            <th class="colHeaderLink headerrow-customfield_10011" data-id="customfield_10011">
+                            Epic Name
+                                                    </th>
+                                                
+                                                            <th class="colHeaderLink headerrow-customfield_10012" data-id="customfield_10012">
+                            Epic Status
+                                                    </th>
+                                                
+                                                            <th class="colHeaderLink headerrow-customfield_10021" data-id="customfield_10021">
+                            Flagged
+                                                    </th>
+                                                
+                                                            <th class="colHeaderLink headerrow-customfield_10017" data-id="customfield_10017">
+                            Issue color
+                                                    </th>
+                                                
+                                                            <th class="colHeaderLink headerrow-customfield_10002" data-id="customfield_10002">
+                            Organizations
+                                                    </th>
+                                                
+                                                            <th class="colHeaderLink headerrow-customfield_10018" data-id="customfield_10018">
+                            Parent Link
+                                                    </th>
+                                                
+                                                            <th class="colHeaderLink headerrow-customfield_10019" data-id="customfield_10019">
+                            Rank
+                                                    </th>
+                                                
+                                                            <th class="colHeaderLink headerrow-customfield_10010" data-id="customfield_10010">
+                            Request Type
+                                                    </th>
+                                                
+                                                            <th class="colHeaderLink headerrow-customfield_10004" data-id="customfield_10004">
+                            Severidade
+                                                    </th>
+                                                
+                                                            <th class="colHeaderLink headerrow-customfield_10020" data-id="customfield_10020">
+                            Sprint
+                                                    </th>
+                                                
+                                                            <th class="colHeaderLink headerrow-customfield_10015" data-id="customfield_10015">
+                            Start date
+                                                    </th>
+                                                
+                                                            <th class="colHeaderLink headerrow-customfield_10016" data-id="customfield_10016">
+                            Story point estimate
+                                                    </th>
+                                                
+                                                            <th class="colHeaderLink headerrow-customfield_10023" data-id="customfield_10023">
+                            Target end
+                                                    </th>
+                                                
+                                                            <th class="colHeaderLink headerrow-customfield_10022" data-id="customfield_10022">
+                            Target start
+                                                    </th>
+                                                
+                                                            <th class="colHeaderLink headerrow-customfield_10001" data-id="customfield_10001">
+                            Team
+                                                    </th>
+                                                
+                                                            <th class="colHeaderLink headerrow-customfield_10024" data-id="customfield_10024">
+                            [CHART] Date of First Response
+                                                    </th>
+                                                
+                                                            <th class="colHeaderLink headerrow-customfield_10000" data-id="customfield_10000">
+                            development
+                                                    </th>
+                                                                    </tr>
+    </thead>
+    <tbody>
+                    
+
+                <tr id="issuerow10006" rel="10006" data-issuekey="DFRDB-7" class="issuerow">
+                                            <td class="project">    Desafio Final - Reports de bugs
+</td>
+                                            <td class="issuekey">
+
+    <a class="issue-link" data-issue-key="DFRDB-7" href="https://tayssaavila.atlassian.net/browse/DFRDB-7">DFRDB-7</a>
+</td>
+                                            <td class="summary"><p>
+                Não existe um chat de atendimento no site da Americanas
+    </p>
+</td>
+                                            <td class="issuetype">    Melhoria
+</td>
+                                            <td class="status">
+                <span class=" jira-issue-status-lozenge aui-lozenge jira-issue-status-lozenge-yellow jira-issue-status-lozenge-indeterminate aui-lozenge-subtle jira-issue-status-lozenge-max-width-medium" data-tooltip="&lt;span class=&quot;jira-issue-status-tooltip-title&quot;&gt;Em andamento&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;jira-issue-status-tooltip-desc&quot;&gt;Este problema está sendo trabalhado ativamente no momento pelo responsável.&lt;/span&gt;">Em andamento</span>    </td>
+                                            <td class="priority">           High
+    </td>
+                                            <td class="resolution">    <em>Não resolvido(s)</em>
+</td>
+                                            <td class="assignee">            TAYSSA AVILA
+    </td>
+                                            <td class="reporter">            TAYSSA AVILA
+    </td>
+                                            <td class="creator">            TAYSSA AVILA
+    </td>
+                                            <td class="created"> 09/dez/21 11:31 AM </td>
+                                            <td class="lastViewed"> 09/dez/21 11:40 AM </td>
+                                            <td class="updated"> 09/dez/21 11:37 AM </td>
+                                            <td class="resolutiondate"> &nbsp; </td>
+                                            <td class="versions">    &nbsp;
+</td>
+                                            <td class="fixVersions">    &nbsp;
+</td>
+                                            <td class="components">    &nbsp;
+</td>
+                                            <td class="duedate">    &nbsp;
+</td>
+                                            <td class="votes">0</td>
+                                            <td class="watches">1</td>
+                                            <td class="thumbnail">            <a href="https://tayssaavila.atlassian.net/secure/attachment/10011/shoptime.png">
+            shoptime.png
+        </a>
+    </td>
+                                            <td class="timeoriginalestimate"></td>
+                                            <td class="timeestimate"></td>
+                                            <td class="timespent"></td>
+                                            <td class="workratio">&nbsp;
+</td>
+                                            <td class="subtasks"></td>
+                                            <td class="issuelinks"></td>
+                                            <td class="environment"></td>
+                                            <td class="description">      *Site*<br/>
+Americanas ([https://www.americanas.com.br|https://www.americanas.com.br])<br/>
+<br/>
+*Descrição*<br/>
+Não existe nenhum tipo de chat de atendimento no site Americanas, apenas contatos via telefone e e-mail, não existe chat com inteligência artificial ou chat com atendente (como no Magazine Luiza e na Casas Bahia), nem a possibilidade de contato por whatsapp (como na Shoptime e Submarino, que são da mesma empresa).<br/>
+<br/>
+*Resultado esperado*<br/>
+Um chat diretamente no site ou link para conversa no whatsapp para melhor atendimento<br/>
+<br/>
+*Resultado obtido*<br/>
+Contato apenas por telefone e e-mail<br/>
+<br/>
+*Passos para reproduzir*<br/>
+1. Acessar a Central de Atendimento da Americanas ([https://www.americanas.com.br/hotsite/atendimento|https://www.americanas.com.br/hotsite/atendimento])<br/>
+<br/>
+2. Descer a Página até atingir o final<br/>
+<br/>
+3. Clicar em &quot;Atendimento&quot;<br/>
+<br/>
+4. Descer a Página até atingir o final<br/>
+<br/>
+5. Clicar em &quot;Fale com a gente&quot;<br/>
+<br/>
+6. Descer a Página até atingir o final<br/>
+<br/>
+7. Clicar em &quot;Ver mais&quot; em um tópico de ajuda qualquer<br/>
+<br/>
+8. Responder com não a pergunta &quot;A gente conseguiu te ajudar?&quot;<br/>
+<br/>
+*Ambiente*<br/>
+Ambiente de Produção <br/>
+<br/>
+Windows 10;<br/>
+<br/>
+Resolução 1920x1080;<br/>
+<br/>
+Opera GX Versão 63.0.3368.56786 (Versão oficial) 64 bits.
+  </td>
+                                            <td class="security"></td>
+                                            <td class="progress"></td>
+                                            <td class="aggregateprogress"></td>
+                                            <td class="aggregatetimespent"></td>
+                                            <td class="aggregatetimeestimate"></td>
+                                            <td class="aggregatetimeoriginalestimate"></td>
+                                            <td class="labels">    Funcional</td>
+                                            <td class="statuscategorychangedate"> 09/dez/21 11:32 AM </td>
+                                            <td class="statusCategory">
+    <span class="aui-lozenge aui-lozenge-subtle jira-issue-status-lozenge jira-issue-status-lozenge-yellow
+            jira-issue-status-lozenge-max-width-medium">Em andamento</span>
+</td>
+                                            <td class="parent"></td>
+                                            <td class="customfield_10009"></td>
+                                            <td class="customfield_10008"></td>
+                                            <td class="customfield_10003"></td>
+                                            <td class="customfield_10007"></td>
+                                            <td class="customfield_10006"></td>
+                                            <td class="customfield_10005"></td>
+                                            <td class="customfield_10013"></td>
+                                            <td class="customfield_10014"></td>
+                                            <td class="customfield_10011"></td>
+                                            <td class="customfield_10012"></td>
+                                            <td class="customfield_10021"></td>
+                                            <td class="customfield_10017"></td>
+                                            <td class="customfield_10002"></td>
+                                            <td class="customfield_10018"></td>
+                                            <td class="customfield_10019">      0|i0001b:
+  </td>
+                                            <td class="customfield_10010"></td>
+                                            <td class="customfield_10004">    Baixa
+</td>
+                                            <td class="customfield_10020"></td>
+                                            <td class="customfield_10015"></td>
+                                            <td class="customfield_10016"></td>
+                                            <td class="customfield_10023"></td>
+                                            <td class="customfield_10022"></td>
+                                            <td class="customfield_10001"></td>
+                                            <td class="customfield_10024"></td>
+                                            <td class="customfield_10000"></td>
+                    </tr>
+
+
+                <tr id="issuerow10005" rel="10005" data-issuekey="DFRDB-6" class="issuerow">
+                                            <td class="project">    Desafio Final - Reports de bugs
+</td>
+                                            <td class="issuekey">
+
+    <a class="issue-link" data-issue-key="DFRDB-6" href="https://tayssaavila.atlassian.net/browse/DFRDB-6">DFRDB-6</a>
+</td>
+                                            <td class="summary"><p>
+                Link para contato com a Sequoia através do site da Amazon não funciona
+    </p>
+</td>
+                                            <td class="issuetype">    Bug
+</td>
+                                            <td class="status">
+                <span class=" jira-issue-status-lozenge aui-lozenge jira-issue-status-lozenge-yellow jira-issue-status-lozenge-indeterminate aui-lozenge-subtle jira-issue-status-lozenge-max-width-medium" data-tooltip="&lt;span class=&quot;jira-issue-status-tooltip-title&quot;&gt;Em andamento&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;jira-issue-status-tooltip-desc&quot;&gt;Este problema está sendo trabalhado ativamente no momento pelo responsável.&lt;/span&gt;">Em andamento</span>    </td>
+                                            <td class="priority">           Low
+    </td>
+                                            <td class="resolution">    <em>Não resolvido(s)</em>
+</td>
+                                            <td class="assignee">            TAYSSA AVILA
+    </td>
+                                            <td class="reporter">            TAYSSA AVILA
+    </td>
+                                            <td class="creator">            TAYSSA AVILA
+    </td>
+                                            <td class="created"> 09/dez/21 11:18 AM </td>
+                                            <td class="lastViewed"> 09/dez/21 11:40 AM </td>
+                                            <td class="updated"> 09/dez/21 11:40 AM </td>
+                                            <td class="resolutiondate"> &nbsp; </td>
+                                            <td class="versions">    &nbsp;
+</td>
+                                            <td class="fixVersions">    &nbsp;
+</td>
+                                            <td class="components">    &nbsp;
+</td>
+                                            <td class="duedate">    &nbsp;
+</td>
+                                            <td class="votes">0</td>
+                                            <td class="watches">1</td>
+                                            <td class="thumbnail"></td>
+                                            <td class="timeoriginalestimate"></td>
+                                            <td class="timeestimate"></td>
+                                            <td class="timespent"></td>
+                                            <td class="workratio">&nbsp;
+</td>
+                                            <td class="subtasks"></td>
+                                            <td class="issuelinks"></td>
+                                            <td class="environment">      Ambiente de Produção <br/>
+<br/>
+Windows 10;<br/>
+<br/>
+Resolução 1920x1080;<br/>
+<br/>
+Opera GX Versão 63.0.3368.56786 (Versão oficial) 64 bits.
+  </td>
+                                            <td class="description">      *Pré-requisito*<br/>
+Ter uma conta válida e ter realizado uma compra com a transportadora Sequoia<br/>
+<br/>
+*Site*<br/>
+Amazon ([https://www.amazon.com.br|https://www.amazon.com.br])<br/>
+<br/>
+*Descrição*<br/>
+Ao tentar entrar em contato com a transportadora Sequoia a partir do link da Amazon, o usuário é redirecionado para uma página totalmente branca com um erro de conexão.<br/>
+<br/>
+*Resultado esperado*<br/>
+Acessar a página de contato da transportadora Sequoia<br/>
+<br/>
+*Resultado obtido*<br/>
+Redirecionamento para uma página com erro<br/>
+<br/>
+*Passos para reproduzir*<br/>
+1. Acessar a página de pedidos da Amazon ([https://www.amazon.com.br/gp/css/order-history|https://www.amazon.com.br/gp/css/order-history])<br/>
+<br/>
+2. Selecionar o pedido realizado com a Sequoia<br/>
+<br/>
+3. Clicar em &quot;Rastrear pacote&quot;<br/>
+<br/>
+4. Selecionar &quot;Entrar em contato com SEQUOIA&quot;
+  </td>
+                                            <td class="security"></td>
+                                            <td class="progress"></td>
+                                            <td class="aggregateprogress"></td>
+                                            <td class="aggregatetimespent"></td>
+                                            <td class="aggregatetimeestimate"></td>
+                                            <td class="aggregatetimeoriginalestimate"></td>
+                                            <td class="labels">    Funcional</td>
+                                            <td class="statuscategorychangedate"> 09/dez/21 11:18 AM </td>
+                                            <td class="statusCategory">
+    <span class="aui-lozenge aui-lozenge-subtle jira-issue-status-lozenge jira-issue-status-lozenge-yellow
+            jira-issue-status-lozenge-max-width-medium">Em andamento</span>
+</td>
+                                            <td class="parent"></td>
+                                            <td class="customfield_10009"></td>
+                                            <td class="customfield_10008"></td>
+                                            <td class="customfield_10003"></td>
+                                            <td class="customfield_10007"></td>
+                                            <td class="customfield_10006"></td>
+                                            <td class="customfield_10005"></td>
+                                            <td class="customfield_10013"></td>
+                                            <td class="customfield_10014"></td>
+                                            <td class="customfield_10011"></td>
+                                            <td class="customfield_10012"></td>
+                                            <td class="customfield_10021"></td>
+                                            <td class="customfield_10017"></td>
+                                            <td class="customfield_10002"></td>
+                                            <td class="customfield_10018"></td>
+                                            <td class="customfield_10019">      0|i00013:
+  </td>
+                                            <td class="customfield_10010"></td>
+                                            <td class="customfield_10004">    Baixa
+</td>
+                                            <td class="customfield_10020"></td>
+                                            <td class="customfield_10015"></td>
+                                            <td class="customfield_10016"></td>
+                                            <td class="customfield_10023"></td>
+                                            <td class="customfield_10022"></td>
+                                            <td class="customfield_10001"></td>
+                                            <td class="customfield_10024"></td>
+                                            <td class="customfield_10000"></td>
+                    </tr>
+
+
+                <tr id="issuerow10004" rel="10004" data-issuekey="DFRDB-5" class="issuerow">
+                                            <td class="project">    Desafio Final - Reports de bugs
+</td>
+                                            <td class="issuekey">
+
+    <a class="issue-link" data-issue-key="DFRDB-5" href="https://tayssaavila.atlassian.net/browse/DFRDB-5">DFRDB-5</a>
+</td>
+                                            <td class="summary"><p>
+                Aba de chat da Claro Móvel mal posicionado
+    </p>
+</td>
+                                            <td class="issuetype">    Melhoria
+</td>
+                                            <td class="status">
+                <span class=" jira-issue-status-lozenge aui-lozenge jira-issue-status-lozenge-yellow jira-issue-status-lozenge-indeterminate aui-lozenge-subtle jira-issue-status-lozenge-max-width-medium" data-tooltip="&lt;span class=&quot;jira-issue-status-tooltip-title&quot;&gt;Em andamento&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;jira-issue-status-tooltip-desc&quot;&gt;Este problema está sendo trabalhado ativamente no momento pelo responsável.&lt;/span&gt;">Em andamento</span>    </td>
+                                            <td class="priority">           Low
+    </td>
+                                            <td class="resolution">    <em>Não resolvido(s)</em>
+</td>
+                                            <td class="assignee">            TAYSSA AVILA
+    </td>
+                                            <td class="reporter">            TAYSSA AVILA
+    </td>
+                                            <td class="creator">            TAYSSA AVILA
+    </td>
+                                            <td class="created"> 09/dez/21 11:05 AM </td>
+                                            <td class="lastViewed"> 09/dez/21 11:39 AM </td>
+                                            <td class="updated"> 09/dez/21 11:39 AM </td>
+                                            <td class="resolutiondate"> &nbsp; </td>
+                                            <td class="versions">    &nbsp;
+</td>
+                                            <td class="fixVersions">    &nbsp;
+</td>
+                                            <td class="components">    &nbsp;
+</td>
+                                            <td class="duedate">    &nbsp;
+</td>
+                                            <td class="votes">0</td>
+                                            <td class="watches">1</td>
+                                            <td class="thumbnail">            <a href="https://tayssaavila.atlassian.net/secure/attachment/10008/melhoria+claro+2.png">
+            melhoria claro 2.png
+        </a>
+    </td>
+                                            <td class="timeoriginalestimate"></td>
+                                            <td class="timeestimate"></td>
+                                            <td class="timespent"></td>
+                                            <td class="workratio">&nbsp;
+</td>
+                                            <td class="subtasks"></td>
+                                            <td class="issuelinks"></td>
+                                            <td class="environment"></td>
+                                            <td class="description">      *Pré-requisito*<br/>
+Ter uma conta válida.<br/>
+<br/>
+*Site*<br/>
+Claro ([https://www.claro.com.br|https://www.claro.com.br])<br/>
+<br/>
+*Descrição*<br/>
+Ao abrir um chat com atendente no site da Claro Móvel, abre uma aba no meio da tela, que não acompanha o scroll da página e impossibilita o usuário de acessar itens da página sem fechar o atendimento.<br/>
+<br/>
+*Resultado esperado*<br/>
+O chat abrir no canto da página, como acontece com o chat com inteligência artificial.<br/>
+<br/>
+*Resultado obtido*<br/>
+Um chat mal posicionado, que não acompanha a rolagem da página e que fica em cima de alguns conteúdos da página.<br/>
+<br/>
+*Passos para reproduzir*<br/>
+1. Acessar a Minha Claro Móvel ([https://minhaclaro.claro.com.br|https://minhaclaro.claro.com.br])<br/>
+<br/>
+2. Realizar login em uma conta válida.<br/>
+<br/>
+3. Clicar em &quot;Atendimento&quot; no menu<br/>
+<br/>
+4. Selecionar &quot;Fale com a Claro&quot;<br/>
+<br/>
+5. E selecionar o Chat<br/>
+<br/>
+<br/>
+<br/>
+*Ambiente*<br/>
+<br/>
+Ambiente de Produção<br/>
+<br/>
+Windows 10;<br/>
+<br/>
+Resolução 1920x1080;<br/>
+<br/>
+Opera GX Versão 63.0.3368.56786 (Versão oficial) 64 bits.
+  </td>
+                                            <td class="security"></td>
+                                            <td class="progress"></td>
+                                            <td class="aggregateprogress"></td>
+                                            <td class="aggregatetimespent"></td>
+                                            <td class="aggregatetimeestimate"></td>
+                                            <td class="aggregatetimeoriginalestimate"></td>
+                                            <td class="labels">    Funcional</td>
+                                            <td class="statuscategorychangedate"> 09/dez/21 11:05 AM </td>
+                                            <td class="statusCategory">
+    <span class="aui-lozenge aui-lozenge-subtle jira-issue-status-lozenge jira-issue-status-lozenge-yellow
+            jira-issue-status-lozenge-max-width-medium">Em andamento</span>
+</td>
+                                            <td class="parent"></td>
+                                            <td class="customfield_10009"></td>
+                                            <td class="customfield_10008"></td>
+                                            <td class="customfield_10003"></td>
+                                            <td class="customfield_10007"></td>
+                                            <td class="customfield_10006"></td>
+                                            <td class="customfield_10005"></td>
+                                            <td class="customfield_10013"></td>
+                                            <td class="customfield_10014"></td>
+                                            <td class="customfield_10011"></td>
+                                            <td class="customfield_10012"></td>
+                                            <td class="customfield_10021"></td>
+                                            <td class="customfield_10017"></td>
+                                            <td class="customfield_10002"></td>
+                                            <td class="customfield_10018"></td>
+                                            <td class="customfield_10019">      0|i0000v:
+  </td>
+                                            <td class="customfield_10010"></td>
+                                            <td class="customfield_10004">    Baixa
+</td>
+                                            <td class="customfield_10020"></td>
+                                            <td class="customfield_10015"></td>
+                                            <td class="customfield_10016"></td>
+                                            <td class="customfield_10023"></td>
+                                            <td class="customfield_10022"></td>
+                                            <td class="customfield_10001"></td>
+                                            <td class="customfield_10024"></td>
+                                            <td class="customfield_10000"></td>
+                    </tr>
+
+
+                <tr id="issuerow10003" rel="10003" data-issuekey="DFRDB-4" class="issuerow">
+                                            <td class="project">    Desafio Final - Reports de bugs
+</td>
+                                            <td class="issuekey">
+
+    <a class="issue-link" data-issue-key="DFRDB-4" href="https://tayssaavila.atlassian.net/browse/DFRDB-4">DFRDB-4</a>
+</td>
+                                            <td class="summary"><p>
+                Link para o Instagram no site da EA não funciona
+    </p>
+</td>
+                                            <td class="issuetype">    Bug
+</td>
+                                            <td class="status">
+                <span class=" jira-issue-status-lozenge aui-lozenge jira-issue-status-lozenge-green jira-issue-status-lozenge-done aui-lozenge-subtle jira-issue-status-lozenge-max-width-medium" data-tooltip="&lt;span class=&quot;jira-issue-status-tooltip-title&quot;&gt;Concluído&lt;/span&gt;">Concluído</span>    </td>
+                                            <td class="priority">           Lowest
+    </td>
+                                            <td class="resolution">    Itens concluídos
+</td>
+                                            <td class="assignee">            TAYSSA AVILA
+    </td>
+                                            <td class="reporter">            TAYSSA AVILA
+    </td>
+                                            <td class="creator">            TAYSSA AVILA
+    </td>
+                                            <td class="created"> 06/dez/21 1:22 PM </td>
+                                            <td class="lastViewed"> 09/dez/21 11:39 AM </td>
+                                            <td class="updated"> 09/dez/21 11:36 AM </td>
+                                            <td class="resolutiondate"> 09/dez/21 11:36 AM </td>
+                                            <td class="versions">    &nbsp;
+</td>
+                                            <td class="fixVersions">    &nbsp;
+</td>
+                                            <td class="components">    &nbsp;
+</td>
+                                            <td class="duedate">    &nbsp;
+</td>
+                                            <td class="votes">0</td>
+                                            <td class="watches">1</td>
+                                            <td class="thumbnail">            <a href="https://tayssaavila.atlassian.net/secure/attachment/10005/bugea1.png">
+            bugea1.png
+        </a>
+    </td>
+                                            <td class="timeoriginalestimate"></td>
+                                            <td class="timeestimate"></td>
+                                            <td class="timespent"></td>
+                                            <td class="workratio">&nbsp;
+</td>
+                                            <td class="subtasks"></td>
+                                            <td class="issuelinks"></td>
+                                            <td class="environment">      Ambiente de Produção <br/>
+<br/>
+Windows 10;<br/>
+<br/>
+Resolução 1920x1080;<br/>
+<br/>
+Opera GX Versão 63.0.3368.56786 (Versão oficial) 64 bits.
+  </td>
+                                            <td class="description">      *Site*<br/>
+Eletronic Arts ([https://www.ea.com/pt-br|https://www.ea.com/pt-br])<br/>
+<br/>
+*Descrição*<br/>
+Ao clicar no ícone de Instagram no final da página, é aberta uma nova aba com erro e a mensagem &quot;Essa página não está funcionando&quot;<br/>
+<br/>
+*Resultado esperado*<br/>
+Acessar o Instagram da Eletronic Arts<br/>
+<br/>
+*Resultado obtido*<br/>
+Redirecionamento para página não existente<br/>
+<br/>
+*Passos para reproduzir*<br/>
+1. Acessar a página inicial da EA ([https://www.ea.com/pt-br|https://www.ea.com/pt-br])<br/>
+<br/>
+2. Descer a Página inicial até atingir o final<br/>
+<br/>
+3. Clicar no ícone do Instagram
+  </td>
+                                            <td class="security"></td>
+                                            <td class="progress"></td>
+                                            <td class="aggregateprogress"></td>
+                                            <td class="aggregatetimespent"></td>
+                                            <td class="aggregatetimeestimate"></td>
+                                            <td class="aggregatetimeoriginalestimate"></td>
+                                            <td class="labels">    Funcional</td>
+                                            <td class="statuscategorychangedate"> 09/dez/21 11:36 AM </td>
+                                            <td class="statusCategory">
+    <span class="aui-lozenge aui-lozenge-subtle jira-issue-status-lozenge jira-issue-status-lozenge-green
+            jira-issue-status-lozenge-max-width-medium">Itens concluídos</span>
+</td>
+                                            <td class="parent"></td>
+                                            <td class="customfield_10009"></td>
+                                            <td class="customfield_10008"></td>
+                                            <td class="customfield_10003"></td>
+                                            <td class="customfield_10007"></td>
+                                            <td class="customfield_10006"></td>
+                                            <td class="customfield_10005"></td>
+                                            <td class="customfield_10013"></td>
+                                            <td class="customfield_10014"></td>
+                                            <td class="customfield_10011"></td>
+                                            <td class="customfield_10012"></td>
+                                            <td class="customfield_10021"></td>
+                                            <td class="customfield_10017"></td>
+                                            <td class="customfield_10002"></td>
+                                            <td class="customfield_10018"></td>
+                                            <td class="customfield_10019">      0|i0000n:
+  </td>
+                                            <td class="customfield_10010"></td>
+                                            <td class="customfield_10004">    Baixa
+</td>
+                                            <td class="customfield_10020"></td>
+                                            <td class="customfield_10015"></td>
+                                            <td class="customfield_10016"></td>
+                                            <td class="customfield_10023"></td>
+                                            <td class="customfield_10022"></td>
+                                            <td class="customfield_10001"></td>
+                                            <td class="customfield_10024"></td>
+                                            <td class="customfield_10000"></td>
+                    </tr>
+
+
+                <tr id="issuerow10002" rel="10002" data-issuekey="DFRDB-3" class="issuerow">
+                                            <td class="project">    Desafio Final - Reports de bugs
+</td>
+                                            <td class="issuekey">
+
+    <a class="issue-link" data-issue-key="DFRDB-3" href="https://tayssaavila.atlassian.net/browse/DFRDB-3">DFRDB-3</a>
+</td>
+                                            <td class="summary"><p>
+                Erro na recuperação de conta na Eletronic Arts
+    </p>
+</td>
+                                            <td class="issuetype">    Bug
+</td>
+                                            <td class="status">
+                <span class=" jira-issue-status-lozenge aui-lozenge jira-issue-status-lozenge-green jira-issue-status-lozenge-done aui-lozenge-subtle jira-issue-status-lozenge-max-width-medium" data-tooltip="&lt;span class=&quot;jira-issue-status-tooltip-title&quot;&gt;Concluído&lt;/span&gt;">Concluído</span>    </td>
+                                            <td class="priority">           Highest
+    </td>
+                                            <td class="resolution">    Itens concluídos
+</td>
+                                            <td class="assignee">            TAYSSA AVILA
+    </td>
+                                            <td class="reporter">            TAYSSA AVILA
+    </td>
+                                            <td class="creator">            TAYSSA AVILA
+    </td>
+                                            <td class="created"> 06/dez/21 1:13 PM </td>
+                                            <td class="lastViewed"> 09/dez/21 11:39 AM </td>
+                                            <td class="updated"> 09/dez/21 11:41 AM </td>
+                                            <td class="resolutiondate"> 09/dez/21 11:34 AM </td>
+                                            <td class="versions">    &nbsp;
+</td>
+                                            <td class="fixVersions">    &nbsp;
+</td>
+                                            <td class="components">    &nbsp;
+</td>
+                                            <td class="duedate">    &nbsp;
+</td>
+                                            <td class="votes">0</td>
+                                            <td class="watches">1</td>
+                                            <td class="thumbnail"></td>
+                                            <td class="timeoriginalestimate"></td>
+                                            <td class="timeestimate"></td>
+                                            <td class="timespent"></td>
+                                            <td class="workratio">&nbsp;
+</td>
+                                            <td class="subtasks"></td>
+                                            <td class="issuelinks"></td>
+                                            <td class="environment">      Ambiente de Produção <br/>
+<br/>
+Windows 10;<br/>
+<br/>
+Resolução 1920x1080;<br/>
+<br/>
+Opera GX Versão 63.0.3368.56786 (Versão oficial) 64 bits.
+  </td>
+                                            <td class="description">      *Pré-requisito*<br/>
+Ter uma conta válida<br/>
+<br/>
+*Site*<br/>
+Eletronic Arts ([https://www.ea.com/pt-br|https://www.ea.com/pt-br])<br/>
+<br/>
+*Descrição*<br/>
+Ao solicitar reset de senha e digitar as credenciais corretas, ao invés de possibilitar a troca de senha, o usuário é redirecionado para uma página com códigos em HTML.<br/>
+<br/>
+*Resultado esperado*<br/>
+Conseguir trocar a senha da conta.<br/>
+<br/>
+*Resultado obtido*<br/>
+Redirecionamento para uma página com códigos em HTML.<br/>
+<br/>
+*Passos para reproduzir*<br/>
+1. Acessar a página de reset de senha do site Eletronic Arts ([https://signin.ea.com/p/juno/resetPassword|https://signin.ea.com/p/juno/resetPassword])<br/>
+<br/>
+2. Digitar um e-mail cadastrado no site<br/>
+<br/>
+3. Digitar o CAPTCHA em exibição e confirmar
+  </td>
+                                            <td class="security"></td>
+                                            <td class="progress"></td>
+                                            <td class="aggregateprogress"></td>
+                                            <td class="aggregatetimespent"></td>
+                                            <td class="aggregatetimeestimate"></td>
+                                            <td class="aggregatetimeoriginalestimate"></td>
+                                            <td class="labels">    Funcional</td>
+                                            <td class="statuscategorychangedate"> 09/dez/21 11:34 AM </td>
+                                            <td class="statusCategory">
+    <span class="aui-lozenge aui-lozenge-subtle jira-issue-status-lozenge jira-issue-status-lozenge-green
+            jira-issue-status-lozenge-max-width-medium">Itens concluídos</span>
+</td>
+                                            <td class="parent"></td>
+                                            <td class="customfield_10009"></td>
+                                            <td class="customfield_10008"></td>
+                                            <td class="customfield_10003"></td>
+                                            <td class="customfield_10007"></td>
+                                            <td class="customfield_10006"></td>
+                                            <td class="customfield_10005"></td>
+                                            <td class="customfield_10013"></td>
+                                            <td class="customfield_10014"></td>
+                                            <td class="customfield_10011"></td>
+                                            <td class="customfield_10012"></td>
+                                            <td class="customfield_10021"></td>
+                                            <td class="customfield_10017"></td>
+                                            <td class="customfield_10002"></td>
+                                            <td class="customfield_10018"></td>
+                                            <td class="customfield_10019">      0|i0000f:
+  </td>
+                                            <td class="customfield_10010"></td>
+                                            <td class="customfield_10004">    Alta
+</td>
+                                            <td class="customfield_10020"></td>
+                                            <td class="customfield_10015"></td>
+                                            <td class="customfield_10016"></td>
+                                            <td class="customfield_10023"></td>
+                                            <td class="customfield_10022"></td>
+                                            <td class="customfield_10001"></td>
+                                            <td class="customfield_10024"></td>
+                                            <td class="customfield_10000"></td>
+                    </tr>
+
+
+                <tr id="issuerow10001" rel="10001" data-issuekey="DFRDB-2" class="issuerow">
+                                            <td class="project">    Desafio Final - Reports de bugs
+</td>
+                                            <td class="issuekey">
+
+    <a class="issue-link" data-issue-key="DFRDB-2" href="https://tayssaavila.atlassian.net/browse/DFRDB-2">DFRDB-2</a>
+</td>
+                                            <td class="summary"><p>
+                Site Casa Rio Grande do Sul calcula frete com CEPs inválidos
+    </p>
+</td>
+                                            <td class="issuetype">    Bug
+</td>
+                                            <td class="status">
+                <span class=" jira-issue-status-lozenge aui-lozenge jira-issue-status-lozenge-yellow jira-issue-status-lozenge-indeterminate aui-lozenge-subtle jira-issue-status-lozenge-max-width-medium" data-tooltip="&lt;span class=&quot;jira-issue-status-tooltip-title&quot;&gt;Em andamento&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;jira-issue-status-tooltip-desc&quot;&gt;Este problema está sendo trabalhado ativamente no momento pelo responsável.&lt;/span&gt;">Em andamento</span>    </td>
+                                            <td class="priority">           Low
+    </td>
+                                            <td class="resolution">    <em>Não resolvido(s)</em>
+</td>
+                                            <td class="assignee">            TAYSSA AVILA
+    </td>
+                                            <td class="reporter">            TAYSSA AVILA
+    </td>
+                                            <td class="creator">            TAYSSA AVILA
+    </td>
+                                            <td class="created"> 06/dez/21 1:03 PM </td>
+                                            <td class="lastViewed"> 09/dez/21 11:38 AM </td>
+                                            <td class="updated"> 09/dez/21 11:38 AM </td>
+                                            <td class="resolutiondate"> &nbsp; </td>
+                                            <td class="versions">    &nbsp;
+</td>
+                                            <td class="fixVersions">    &nbsp;
+</td>
+                                            <td class="components">    &nbsp;
+</td>
+                                            <td class="duedate">    &nbsp;
+</td>
+                                            <td class="votes">0</td>
+                                            <td class="watches">1</td>
+                                            <td class="thumbnail">            <a href="https://tayssaavila.atlassian.net/secure/attachment/10002/Bug+casa+rgss.png">
+            Bug casa rgss.png
+        </a>
+    </td>
+                                            <td class="timeoriginalestimate"></td>
+                                            <td class="timeestimate"></td>
+                                            <td class="timespent"></td>
+                                            <td class="workratio">&nbsp;
+</td>
+                                            <td class="subtasks"></td>
+                                            <td class="issuelinks"></td>
+                                            <td class="environment">      Ambiente de Produção <br/>
+<br/>
+Windows 10;<br/>
+<br/>
+Resolução 1920x1080;<br/>
+<br/>
+Opera GX Versão 63.0.3368.56786 (Versão oficial) 64 bits.<br/>
+
+  </td>
+                                            <td class="description">      *Site*<br/>
+Casa Rio Grande do Sul ([https://www.casargs.com.br|https://www.casargs.com.br])<br/>
+<br/>
+*Descrição*<br/>
+Ao digitar um CEP inválido na seção de calcular o frete, o site retorna um prazo e valor de entrega para esse CEP inexistente. Foi conferido através da API ViaCEP a veracidade desse CEP digitado.<br/>
+<br/>
+*Resultado esperado*<br/>
+Uma mensagem informando que o CEP não foi encontrado.<br/>
+<br/>
+*Resultado obtido*<br/>
+Prazo e valor de entrega calculados para um CEP inexistente,<br/>
+<br/>
+Pa*ssos para reproduzir*<br/>
+1. Acessar site da Casa Rio Grande do Sul: ([https://www.casargs.com.br|https://www.casargs.com.br/])<br/>
+<br/>
+2. Clicar em um produto qualquer<br/>
+<br/>
+3. Descer até a seção &quot;Calcule o frete&quot;<br/>
+<br/>
+4. Digitar um CEP inválido e confirmar
+  </td>
+                                            <td class="security"></td>
+                                            <td class="progress"></td>
+                                            <td class="aggregateprogress"></td>
+                                            <td class="aggregatetimespent"></td>
+                                            <td class="aggregatetimeestimate"></td>
+                                            <td class="aggregatetimeoriginalestimate"></td>
+                                            <td class="labels">    Funcional</td>
+                                            <td class="statuscategorychangedate"> 06/dez/21 1:37 PM </td>
+                                            <td class="statusCategory">
+    <span class="aui-lozenge aui-lozenge-subtle jira-issue-status-lozenge jira-issue-status-lozenge-yellow
+            jira-issue-status-lozenge-max-width-medium">Em andamento</span>
+</td>
+                                            <td class="parent"></td>
+                                            <td class="customfield_10009"></td>
+                                            <td class="customfield_10008"></td>
+                                            <td class="customfield_10003"></td>
+                                            <td class="customfield_10007"></td>
+                                            <td class="customfield_10006"></td>
+                                            <td class="customfield_10005"></td>
+                                            <td class="customfield_10013"></td>
+                                            <td class="customfield_10014"></td>
+                                            <td class="customfield_10011"></td>
+                                            <td class="customfield_10012"></td>
+                                            <td class="customfield_10021"></td>
+                                            <td class="customfield_10017"></td>
+                                            <td class="customfield_10002"></td>
+                                            <td class="customfield_10018"></td>
+                                            <td class="customfield_10019">      0|i00007:
+  </td>
+                                            <td class="customfield_10010"></td>
+                                            <td class="customfield_10004">    Baixa
+</td>
+                                            <td class="customfield_10020"></td>
+                                            <td class="customfield_10015"></td>
+                                            <td class="customfield_10016"></td>
+                                            <td class="customfield_10023"></td>
+                                            <td class="customfield_10022"></td>
+                                            <td class="customfield_10001"></td>
+                                            <td class="customfield_10024"></td>
+                                            <td class="customfield_10000"></td>
+                    </tr>
+
+
+                <tr id="issuerow10000" rel="10000" data-issuekey="DFRDB-1" class="issuerow">
+                                            <td class="project">    Desafio Final - Reports de bugs
+</td>
+                                            <td class="issuekey">
+
+    <a class="issue-link" data-issue-key="DFRDB-1" href="https://tayssaavila.atlassian.net/browse/DFRDB-1">DFRDB-1</a>
+</td>
+                                            <td class="summary"><p>
+                Não é possível logar no site ENADE pelo navegador Opera GX
+    </p>
+</td>
+                                            <td class="issuetype">    Bug
+</td>
+                                            <td class="status">
+                <span class=" jira-issue-status-lozenge aui-lozenge jira-issue-status-lozenge-yellow jira-issue-status-lozenge-indeterminate aui-lozenge-subtle jira-issue-status-lozenge-max-width-medium" data-tooltip="&lt;span class=&quot;jira-issue-status-tooltip-title&quot;&gt;Em andamento&lt;/span&gt;&lt;br&gt;&lt;span class=&quot;jira-issue-status-tooltip-desc&quot;&gt;Este problema está sendo trabalhado ativamente no momento pelo responsável.&lt;/span&gt;">Em andamento</span>    </td>
+                                            <td class="priority">           High
+    </td>
+                                            <td class="resolution">    <em>Não resolvido(s)</em>
+</td>
+                                            <td class="assignee">            TAYSSA AVILA
+    </td>
+                                            <td class="reporter">            TAYSSA AVILA
+    </td>
+                                            <td class="creator">            TAYSSA AVILA
+    </td>
+                                            <td class="created"> 06/dez/21 12:41 PM </td>
+                                            <td class="lastViewed"> 09/dez/21 11:37 AM </td>
+                                            <td class="updated"> 09/dez/21 11:37 AM </td>
+                                            <td class="resolutiondate"> &nbsp; </td>
+                                            <td class="versions">                        v1.30.2939 (:80)            </td>
+                                            <td class="fixVersions">    &nbsp;
+</td>
+                                            <td class="components">    &nbsp;
+</td>
+                                            <td class="duedate">    &nbsp;
+</td>
+                                            <td class="votes">0</td>
+                                            <td class="watches">1</td>
+                                            <td class="thumbnail"></td>
+                                            <td class="timeoriginalestimate"></td>
+                                            <td class="timeestimate"></td>
+                                            <td class="timespent"></td>
+                                            <td class="workratio">&nbsp;
+</td>
+                                            <td class="subtasks"></td>
+                                            <td class="issuelinks"></td>
+                                            <td class="environment">      Ambiente de Produção <br/>
+<br/>
+Windows 10;<br/>
+<br/>
+Resolução 1920x1080;<br/>
+<br/>
+Opera GX Versão 63.0.3368.56786 (Versão oficial) 64 bits.
+  </td>
+                                            <td class="description">      *Pré-requisito*<br/>
+Ter uma conta válida<br/>
+<br/>
+*Site*<br/>
+ENADE v1.30.2939 (:80) ([http://enade.inep.gov.br/enade/#\!/index|http://enade.inep.gov.br/enade/#!/index])<br/>
+<br/>
+*Descrição*<br/>
+Ao tentar efetuar login no site do ENADE via gov.br, com credenciais válidas, o usuário é redirecionado novamente para a Página inicial do ENADE, sem autenticação, onde é solicitado o login.<br/>
+<br/>
+*Resultado esperado*<br/>
+Login efetuado com sucesso e acesso à conta do usuário.<br/>
+<br/>
+*Resultado obtido*<br/>
+Falha no login e redirecionamento para a página inicial<br/>
+<br/>
+*Passos para reproduzir*<br/>
+1. Acessar site do ENADE: [http://enade.inep.gov.br/enade/#\!/index|http://enade.inep.gov.br/enade/#!/index]<br/>
+<br/>
+2. Clicar em &quot;Entrar com gov.br&quot;<br/>
+<br/>
+3. Clicar em &quot;Acessar como estudante&quot;<br/>
+<br/>
+4. Digitar credenciais válidas e confirmar
+  </td>
+                                            <td class="security"></td>
+                                            <td class="progress"></td>
+                                            <td class="aggregateprogress"></td>
+                                            <td class="aggregatetimespent"></td>
+                                            <td class="aggregatetimeestimate"></td>
+                                            <td class="aggregatetimeoriginalestimate"></td>
+                                            <td class="labels">    Funcional</td>
+                                            <td class="statuscategorychangedate"> 06/dez/21 12:41 PM </td>
+                                            <td class="statusCategory">
+    <span class="aui-lozenge aui-lozenge-subtle jira-issue-status-lozenge jira-issue-status-lozenge-yellow
+            jira-issue-status-lozenge-max-width-medium">Em andamento</span>
+</td>
+                                            <td class="parent"></td>
+                                            <td class="customfield_10009"></td>
+                                            <td class="customfield_10008"></td>
+                                            <td class="customfield_10003"></td>
+                                            <td class="customfield_10007"></td>
+                                            <td class="customfield_10006"></td>
+                                            <td class="customfield_10005"></td>
+                                            <td class="customfield_10013"></td>
+                                            <td class="customfield_10014"></td>
+                                            <td class="customfield_10011"></td>
+                                            <td class="customfield_10012"></td>
+                                            <td class="customfield_10021"></td>
+                                            <td class="customfield_10017"></td>
+                                            <td class="customfield_10002"></td>
+                                            <td class="customfield_10018"></td>
+                                            <td class="customfield_10019">      0|hzzzzz:
+  </td>
+                                            <td class="customfield_10010"></td>
+                                            <td class="customfield_10004">    Alta
+</td>
+                                            <td class="customfield_10020"></td>
+                                            <td class="customfield_10015"></td>
+                                            <td class="customfield_10016"></td>
+                                            <td class="customfield_10023"></td>
+                                            <td class="customfield_10022"></td>
+                                            <td class="customfield_10001"></td>
+                                            <td class="customfield_10024"></td>
+                                            <td class="customfield_10000"></td>
+                    </tr>
+        </tbody>
+    </table>
+    <div class="end-of-stable-message"></div>
+            <table border="1" >
+<tr>
+    <td bgcolor="#dddddd" colspan="64"><font size="1">
+        Gerado em Thu Dec 09 14:41:38 UTC 2021 por TAYSSA AVILA usando JIRA 1001.0.0-SNAPSHOT#100183-sha1:f6eba4b633dfded3174df386bc995c8e540aebf2.
+    </font></td>
+</tr>
+</table>
+
+</body>
+</html>
